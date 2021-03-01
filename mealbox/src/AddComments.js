@@ -33,6 +33,7 @@ export default class AddComments extends React.Component {
                     <p>ID:{l.recipe_id}</p>
                     <p>{l.comments}</p>
                     <p>By: {l.username}</p>
+                    <button value={l._id} onClick={this.deleteComment}>Delete</button>
                 </div>
             )
         }
@@ -64,6 +65,15 @@ export default class AddComments extends React.Component {
         this.setState({
             commentsList : [...this.state.commentsList, newComment]
         })
+    }
+
+    deleteComment = async (e) => {
+        let index = this.state.commentsList.findIndex(i=> i._id == e.target.value)
+
+        await axios.delete(baseURL+"/comments/"+ e.target.value )
+        this.setState({
+            commentsList: [...this.state.commentsList.slice(0, index), ...this.state.commentsList.slice(index + 1)]
+        }) 
     }
 
     render() {
