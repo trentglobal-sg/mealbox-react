@@ -1,10 +1,11 @@
 import './App.css';
 import AddComments from "./AddComments"
 
+
 function App() {
   return (
     <div className="App">
-    <AddComments/>
+        <AddComments/>
     </div>
   );
 }
