@@ -12,6 +12,7 @@ export default class AddComments extends React.Component {
         recipe_name: "",
         user_id: "",
         recipe_id: "",
+        _id: "",
 
     }
 
@@ -44,10 +45,25 @@ export default class AddComments extends React.Component {
         })
     }
 
-    add = (e) => {
-        // let newComment = {
+    add = async (e) => {
+        let newComment = {
+            comments: this.state.comments,
+            username: this.state.username,
+            recipe_name: this.state.recipe_name,
+            user_id: this.state.user_id,
+            recipe_id: this.state.recipe_id,
+        }
 
-        // }
+        let response  = await axios.post(baseURL + "/comments", newComment)
+
+        // How to get the object id after i post to axios? 
+        newComment._id = response.data._id
+        console.log(newComment._id)
+
+        
+        this.setState({
+            commentsList : [...this.state.commentsList, newComment]
+        })
     }
 
     render() {
@@ -83,7 +99,7 @@ export default class AddComments extends React.Component {
                     </label>
                     <input type="text" name="recipe_id" value={this.state.recipe_id} onChange={this.updateField} />
                 </div>
-                <button onClick={this.state.add}>Add</button>
+                <button onClick={this.add}>Add</button>
 
 
                 {this.renderCommentsList()}
