@@ -24,6 +24,7 @@ export default class AddComments extends React.Component {
         })
     }
 
+    // List rendering using for loop
     renderCommentsList = () => {
         let list = [];
         for (let l of this.state.commentsList) {
@@ -39,13 +40,15 @@ export default class AddComments extends React.Component {
         }
         return list
     }
-
+    
+    // Generic update form; ensure name in state is the same as name in form
     updateField = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    // Adding a new comment
     add = async (e) => {
         let newComment = {
             comments: this.state.comments,
@@ -55,22 +58,24 @@ export default class AddComments extends React.Component {
             recipe_id: this.state.recipe_id,
         }
 
+        // Posting the comment to db using API link
         let response  = await axios.post(baseURL + "/comments", newComment)
 
-        // How to get the object id after i post to axios? 
-        newComment._id = response.data._id
-        console.log(newComment._id)
+        newComment._id = response.data.insertedId
 
-        
         this.setState({
             commentsList : [...this.state.commentsList, newComment]
         })
     }
 
+    // Deleting comment
     deleteComment = async (e) => {
         let index = this.state.commentsList.findIndex(i=> i._id == e.target.value)
 
+        // Deleting from db
         await axios.delete(baseURL+"/comments/"+ e.target.value )
+
+        // Updating state in React
         this.setState({
             commentsList: [...this.state.commentsList.slice(0, index), ...this.state.commentsList.slice(index + 1)]
         }) 
