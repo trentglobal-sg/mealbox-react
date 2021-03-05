@@ -8,10 +8,10 @@ export default class CreateRecipe extends React.Component {
         recipesList: [],
         recipe_name: "",
         description: "",
-        ingredients: [],
+        ingredients: "",
         cuisine_type: "",
         tags: [],
-        instructions: [],
+        instructions: "",
         difficulty: "",
         cooking_time: "",
         preparation_time: "",
@@ -36,6 +36,19 @@ export default class CreateRecipe extends React.Component {
         })
     }
 
+    // Update Tags state Function for checkboxes
+    updateTags = (e) => {
+        if (this.state.tags.includes(e.target.value) === false) {
+            this.setState({
+                [e.target.name]: [...this.state.tags, e.target.value]
+            })
+        } else {
+            this.setState({
+                [e.target.name]: [...this.state.tags].filter(selected => selected !== e.target.value)
+            })
+        }
+    }
+
     renderList = () => {
         let list = [];
         for (let l of this.state.recipesList) {
@@ -50,11 +63,34 @@ export default class CreateRecipe extends React.Component {
                     <p>Cooking Time:{l.cooking_time}</p>
                     <p>Serving: {l.serving}</p>
                     <p>Tags: {l.tags.join(", ")}</p>
+                    <p>Ingredients: {l.ingredients.map((ingredient, index) => (<p key={index}>{ingredient}</p>))}</p>
+                    <p>Instructions: {l.instructions.map((instruction, index) => (<p key={index}>Step {index + 1}: {instruction}</p>))}</p>
                     <button>{l.difficulty}</button>
                 </div>
             )
         }
         return list
+    }
+
+    // Adding a new recipe
+    add = async (e) => {
+        let regExp = /\s*,\s*/;
+        let newIngredients = this.state.ingredients.split(regExp)
+        let newInstructions = this.state.instructions.split(regExp)
+        let newRecipe = {
+            ingredients: newIngredients,
+            instructions: newInstructions
+        }
+
+        // Posting the comment to db using API link
+        let response = await axios.post(baseURL + "/recipes", newRecipe)
+
+        newRecipe._id = response.data.insertedId
+        newRecipe.created_on = response.data.ops[0].created_on
+
+        this.setState({
+            recipesList: [...this.state.recipesList, newRecipe]
+        })
     }
 
     render() {
@@ -84,6 +120,28 @@ export default class CreateRecipe extends React.Component {
                         <option>Japanese</option>
                     </select>
                 </div>
+                <div>
+                    <label>Tags:</label>
+                    <input type="checkbox" name="tags" value="Slow Cook Required" onChange={this.updateTags} checked={this.state.tags.includes("Slow Cook Required")} /><label>Slow Cook Required</label>
+                    <input type="checkbox" name="tags" value="Made From Scratch" onChange={this.updateTags} checked={this.state.tags.includes("Made From Scratch")} /><label>Made From Scratch</label>
+                    <input type="checkbox" name="tags" value="Date Night Special" onChange={this.updateTags} checked={this.state.tags.includes("Date Night Special")} /><label>Date Night Special</label>
+                    <input type="checkbox" name="tags" value="5-Minutes Or Less" onChange={this.updateTags} checked={this.state.tags.includes("5-Minutes Or Less")} /><label>5-Minutes Or Less</label>
+                    <input type="checkbox" name="tags" value="Suitable For All" onChange={this.updateTags} checked={this.state.tags.includes("Suitable For All")} /><label>Suitable For All</label>
+                    <input type="checkbox" name="tags" value="Kids Favourite" onChange={this.updateTags} checked={this.state.tags.includes("Kids Favourite")} /><label>Kids Favourite</label>
+                </div>
+                <div>
+                    <label>Ingredients:</label>
+                    <div>
+                        <textarea name="ingredients" rows="2" cols="30" placeholder="Seperate each ingredients by a comma" value={this.state.ingredients} onChange={this.updateField}></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label>Instructions:</label>
+                    <div>
+                        <textarea name="instructions" rows="2" cols="30" placeholder="Seperate each instructions by a comma" value={this.state.instructions} onChange={this.updateField}></textarea>
+                    </div>
+                </div>
+                <button onClick={this.add}>Submit</button>
                 {this.renderList()}
             </React.Fragment>
         )
