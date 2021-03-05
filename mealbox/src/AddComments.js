@@ -34,6 +34,7 @@ export default class AddComments extends React.Component {
                     <p>ID:{l.recipe_id}</p>
                     <p>{l.comments}</p>
                     <p>By: {l.username}</p>
+                    <p>{(l.last_updated).slice(0,10)}</p>
                     <button value={l._id} onClick={this.deleteComment}>Delete</button>
                 </div>
             )
