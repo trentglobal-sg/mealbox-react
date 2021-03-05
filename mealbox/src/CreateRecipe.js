@@ -15,7 +15,7 @@ export default class CreateRecipe extends React.Component {
         difficulty: "",
         cooking_time: "",
         preparation_time: "",
-        serving: 0,
+        serving: "",
         created_by: ""
 
 
@@ -74,12 +74,22 @@ export default class CreateRecipe extends React.Component {
 
     // Adding a new recipe
     add = async (e) => {
+        // Can just split with (",") 
         let regExp = /\s*,\s*/;
         let newIngredients = this.state.ingredients.split(regExp)
         let newInstructions = this.state.instructions.split(regExp)
         let newRecipe = {
             ingredients: newIngredients,
-            instructions: newInstructions
+            instructions: newInstructions,
+            recipe_name: this.state.recipe_name,
+            description: this.state.description,
+            cuisine_type: this.state.cuisine_type,
+            tags: this.state.tags,
+            difficulty: this.state.difficulty,
+            cooking_time: this.state.cooking_time,
+            preparation_time: this.state.preparation_time,
+            serving: this.state.serving,
+            created_by: this.state.created_by
         }
 
         // Posting the comment to db using API link
@@ -97,6 +107,12 @@ export default class CreateRecipe extends React.Component {
         return (
             <React.Fragment>
                 <h1>Create Recipe</h1>
+                <div className = "container">
+                    <label>
+                        Your Name:
+                    </label>
+                    <input type="text" name="created_by" value={this.state.created_by} onChange={this.updateField} required />
+                </div>
                 <div>
                     <label>
                         Recipe Name:
@@ -121,6 +137,30 @@ export default class CreateRecipe extends React.Component {
                     </select>
                 </div>
                 <div>
+                    <label>
+                        Cooking Time:
+                    </label>
+                    <input type="text" name="cooking_time" value={this.state.cooking_time} onChange={this.updateField} />
+                </div>
+                <div>
+                    <label>
+                        Preparation Time:
+                    </label>
+                    <input type="text" name="preparation_time" value={this.state.preparation_time} onChange={this.updateField} />
+                </div>
+                <div>
+                    <label>
+                        Serving Size:
+                    </label>
+                    <input type="text" name="serving" value={this.state.serving} onChange={this.updateField} />
+                </div>
+                <div>
+                    <label>Difficulty :</label>
+                    <input type="radio" name="difficulty" value="Easy" onChange={this.updateField} checked={this.state.difficulty === "Easy"} /><label>Easy</label>
+                    <input type="radio" name="difficulty" value="Moderate" onChange={this.updateField} checked={this.state.difficulty === "Moderate"} /><label>Moderate</label>
+                    <input type="radio" name="difficulty" value="Hard" onChange={this.updateField} checked={this.state.difficulty === "Hard"} /><label>Hard</label>
+                </div>
+                <div>
                     <label>Tags:</label>
                     <input type="checkbox" name="tags" value="Slow Cook Required" onChange={this.updateTags} checked={this.state.tags.includes("Slow Cook Required")} /><label>Slow Cook Required</label>
                     <input type="checkbox" name="tags" value="Made From Scratch" onChange={this.updateTags} checked={this.state.tags.includes("Made From Scratch")} /><label>Made From Scratch</label>
@@ -141,6 +181,7 @@ export default class CreateRecipe extends React.Component {
                         <textarea name="instructions" rows="2" cols="30" placeholder="Seperate each instructions by a comma" value={this.state.instructions} onChange={this.updateField}></textarea>
                     </div>
                 </div>
+
                 <button onClick={this.add}>Submit</button>
                 {this.renderList()}
             </React.Fragment>
