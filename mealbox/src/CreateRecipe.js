@@ -123,6 +123,9 @@ export default class CreateRecipe extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <div className="hero-img">
+                    <div className="cover-overlay"></div>
+                </div>
                 <div className="container-fluid p-3">
                     <section className="row">
                         <div className="col-xl-8 col-11 mx-auto my-auto">
