@@ -246,8 +246,8 @@ export default class CreateRecipe extends React.Component {
                                     <div className="mt-2" style={{
                                         textAlign: "center"
                                     }}>
-                                        <button onClick={this.add}>Submit</button>
-                                        <button className="ml-2" >Cancel</button>
+                                        <button className="btn action-buttons btn-warning"  onClick={this.add}>Create</button>
+                                        <button className="btn action-buttons btn-secondary ml-2" >Cancel</button>
                                     </div>
 
                                 </section>
