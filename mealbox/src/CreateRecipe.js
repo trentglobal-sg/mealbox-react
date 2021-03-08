@@ -6,6 +6,7 @@ const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
 export default class CreateRecipe extends React.Component {
     state = {
         recipesList: [],
+        //Recipe Collection
         recipe_name: "",
         description: "",
         ingredients: "",
@@ -16,7 +17,10 @@ export default class CreateRecipe extends React.Component {
         cooking_time: "",
         preparation_time: "",
         serving: "",
-        created_by: ""
+        created_by: "",
+        //Resources Collection
+        img_url:"",
+
 
 
     }
@@ -74,6 +78,14 @@ export default class CreateRecipe extends React.Component {
 
     // Adding a new recipe
     add = async (e) => {
+        // Update resource Collections first
+        let newResource = {
+            img_url: this.state.img_url
+        }
+
+        let resourceResponse = await axios.post(baseURL + "/resources", newResource)
+        let newResourceID = resourceResponse.data.insertedId
+
         // Can just split with (",") 
         let regExp = /\s*,\s*/;
         let newIngredients = this.state.ingredients.split(regExp)
@@ -89,14 +101,18 @@ export default class CreateRecipe extends React.Component {
             cooking_time: this.state.cooking_time,
             preparation_time: this.state.preparation_time,
             serving: this.state.serving,
-            created_by: this.state.created_by
+            created_by: this.state.created_by,
+            resource: {
+                _id: newResourceID,
+                img_url: this.state.img_url
+            }
         }
 
         // Posting the comment to db using API link
-        let response = await axios.post(baseURL + "/recipes", newRecipe)
+        let recipeResponse = await axios.post(baseURL + "/recipes", newRecipe)
 
-        newRecipe._id = response.data.insertedId
-        newRecipe.created_on = response.data.ops[0].created_on
+        newRecipe._id = recipeResponse.data.insertedId
+        newRecipe.created_on = recipeResponse.data.ops[0].created_on
 
         this.setState({
             recipesList: [...this.state.recipesList, newRecipe]
@@ -107,7 +123,7 @@ export default class CreateRecipe extends React.Component {
         return (
             <React.Fragment>
                 <h1>Create Recipe</h1>
-                <div className = "container">
+                <div>
                     <label>
                         Your Name:
                     </label>
@@ -118,6 +134,12 @@ export default class CreateRecipe extends React.Component {
                         Recipe Name:
                     </label>
                     <input type="text" name="recipe_name" value={this.state.recipe_name} onChange={this.updateField} />
+                </div>
+                <div>
+                    <label>
+                        Image URL:
+                    </label>
+                    <input type="text" name="img_url" value={this.state.img_url} onChange={this.updateField} />
                 </div>
                 <div>
                     <label>
@@ -183,7 +205,7 @@ export default class CreateRecipe extends React.Component {
                 </div>
 
                 <button onClick={this.add}>Submit</button>
-                {this.renderList()}
+                {/* {this.renderList()} */}
             </React.Fragment>
         )
     }
