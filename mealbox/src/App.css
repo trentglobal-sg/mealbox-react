@@ -1,3 +1,7 @@
+.navbar{
+    justify-content: flex-start !important;
+}
+
 .hero-img{
     height: 120px;
     background-image: url("https://images.media-allrecipes.com/ar-images/profiles/covers/smoothies-header.jpg");
