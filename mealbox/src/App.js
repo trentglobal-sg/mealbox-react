@@ -2,6 +2,7 @@ import './App.css';
 // import AddComments from "./AddComments"
 import CreateRecipe from './CreateRecipe';
 import Header from "./Header"
+import Footer from "./Footer"
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Header/>
         <CreateRecipe/>
         {/* <AddComments/> */}
+        <Footer/>
     </div>
   );
 }
