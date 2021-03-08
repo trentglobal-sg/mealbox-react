@@ -79,6 +79,9 @@ export default class CreateRecipe extends React.Component {
 
     // Adding a new recipe
     add = async (e) => {
+        // Checking if all the state is not null. 
+        
+
         // Update resource Collections first
         let newResource = {
             img_url: this.state.img_url
@@ -138,25 +141,28 @@ export default class CreateRecipe extends React.Component {
                                     <div className="form-group">
                                         <label>
                                             Your Name:
-                            </label>
+                                        </label>
                                         <input type="text" name="created_by" className="form-control" value={this.state.created_by} onChange={this.updateField} required />
+                                        <span className="warning-text">*Name must be at least 3 characters long.</span>
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Recipe Name:
-                             </label>
+                                        </label>
                                         <input type="text" name="recipe_name" className="form-control" value={this.state.recipe_name} onChange={this.updateField} />
+                                        <span className="warning-text">*Recipe name must be at least 3 characters long.</span>
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Recipe Image URL:
-                        </label>
+                                        </label>
                                         <input type="text" name="img_url" className="form-control" value={this.state.img_url} onChange={this.updateField} />
+                                        <span className="warning-text">*URL cannot be empty.</span>
                                     </div>
                                     <div>
                                         <label>
                                             Cuisine Type:
-                                </label>
+                                        </label>
                                         <select className="form-control my-1 mr-sm-2" name="cuisine_type" value={this.state.cuisine_type} onChange={this.updateField}>
                                             <option selected>Choose...</option>
                                             <option>American</option>
@@ -164,6 +170,7 @@ export default class CreateRecipe extends React.Component {
                                             <option>Italian</option>
                                             <option>Japanese</option>
                                         </select>
+                                        <span className="warning-text">*Select cuisine type.</span>
                                     </div>
                                 </div>
 
@@ -172,20 +179,24 @@ export default class CreateRecipe extends React.Component {
                                     <div className="form-group">
                                         <label>
                                             Cooking Time:
-                             </label>
+                                         </label>
                                         <input type="text" name="cooking_time" className="form-control" value={this.state.cooking_time} onChange={this.updateField} />
+                                        <span className="warning-text">*Cooking time cannot be empty.</span>
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Preparation Time:
-                            </label>
+                                        </label>
                                         <input type="text" name="preparation_time" className="form-control" value={this.state.preparation_time} onChange={this.updateField} />
+                                        <span className="warning-text">*Preparation time cannot be empty.</span>
+
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Serving Size:
-                             </label>
+                                        </label>
                                         <input type="text" name="serving" className="form-control" value={this.state.serving} onChange={this.updateField} />
+                                        <span className="warning-text">*Serving size cannot be empty.</span>
                                     </div>
                                     <div>
                                         <label>Difficulty:</label>
@@ -197,6 +208,7 @@ export default class CreateRecipe extends React.Component {
                                             <input type="radio" name="difficulty" className="mr-1" value="Moderate" onChange={this.updateField} checked={this.state.difficulty === "Moderate"} /><label className="mr-2">Moderate</label>
                                             <input type="radio" name="difficulty" className="mr-1" value="Hard" onChange={this.updateField} checked={this.state.difficulty === "Hard"} /><label className="mr-2">Hard</label>
                                         </div>
+                                            <span className="warning-text">*Select one difficulty.</span>
                                     </div>
                                 </div>
 
@@ -204,43 +216,47 @@ export default class CreateRecipe extends React.Component {
                                     <div className="form-group">
                                         <label>
                                             Description:
-                            </label>
+                                        </label>
                                         <input type="text" name="description" className="form-control description-textarea" value={this.state.description} onChange={this.updateField} />
+                                        <span className="warning-text">*Description cannot be empty or more than 100 characters.</span>
                                     </div>
                                     <div>
                                         <label>Tags:</label>
                                         <div className="form-check" >
                                             <div>
-                                                <input type="checkbox" name="tags" value="Slow Cook Required" onChange={this.updateTags} checked={this.state.tags.includes("Slow Cook Required")} /><label className="ml-2">Slow Cook Required</label>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" name="tags" value="Made From Scratch" onChange={this.updateTags} checked={this.state.tags.includes("Made From Scratch")} /><label className="ml-2">Made From Scratch</label>
+                                                <input type="checkbox" name="tags" value="5-Minutes Or Less" onChange={this.updateTags} checked={this.state.tags.includes("5-Minutes Or Less")} /><label className="ml-2">5-Minutes Or Less</label>
                                             </div>
                                             <div>
                                                 <input type="checkbox" name="tags" value="Date Night Special" onChange={this.updateTags} checked={this.state.tags.includes("Date Night Special")} /><label className="ml-2">Date Night Special</label>
                                             </div>
                                             <div>
-                                                <input type="checkbox" name="tags" value="5-Minutes Or Less" onChange={this.updateTags} checked={this.state.tags.includes("5-Minutes Or Less")} /><label className="ml-2">5-Minutes Or Less</label>
+                                                <input type="checkbox" name="tags" value="Kids Favourite" onChange={this.updateTags} checked={this.state.tags.includes("Kids Favourite")} /><label className="ml-2">Kids Favourite</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" name="tags" value="Made From Scratch" onChange={this.updateTags} checked={this.state.tags.includes("Made From Scratch")} /><label className="ml-2">Made From Scratch</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" name="tags" value="Slow Cook Required" onChange={this.updateTags} checked={this.state.tags.includes("Slow Cook Required")} /><label className="ml-2">Slow Cook Required</label>
                                             </div>
                                             <div>
                                                 <input type="checkbox" name="tags" value="Suitable For All" onChange={this.updateTags} checked={this.state.tags.includes("Suitable For All")} /><label className="ml-2">Suitable For All</label>
                                             </div>
-                                            <div>
-                                                <input type="checkbox" name="tags" value="Kids Favourite" onChange={this.updateTags} checked={this.state.tags.includes("Kids Favourite")} /><label className="ml-2">Kids Favourite</label>
-                                            </div>
                                         </div>
+                                        <span className="warning-text">*Select at least one tag</span>
                                     </div>
                                     <div>
                                         <label>Ingredients:</label>
                                         <div>
                                             <textarea name="ingredients" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each ingredients by a comma" value={this.state.ingredients} onChange={this.updateField}></textarea>
                                         </div>
+                                        <span className="warning-text">*Ingredients cannot be empty</span>
                                     </div>
                                     <div>
                                         <label>Instructions:</label>
                                         <div>
                                             <textarea name="instructions" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each instructions by a comma" value={this.state.instructions} onChange={this.updateField}></textarea>
                                         </div>
+                                        <span className="warning-text">*Instructions cannot be empty</span>
                                     </div>
 
                                     <div className="mt-2" style={{

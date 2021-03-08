@@ -28,6 +28,12 @@
     height:4.5rem !important;
 }
 
+.warning-text{
+    color: red;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
 .action-buttons{
     width: 150px
 }
