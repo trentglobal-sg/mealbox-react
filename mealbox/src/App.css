@@ -80,6 +80,10 @@
     max-height:100%
 }
 
+.des-buttons{
+    text-align: right;
+}
+
 @media only screen and (max-width: 767px){
   .box{
       height:500px;
@@ -93,5 +97,8 @@
   }
   .test-img{
       max-width: 100%;
+  }
+  .des-buttons{
+      text-align: center;
   }
 }
