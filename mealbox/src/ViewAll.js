@@ -20,7 +20,7 @@ export default class ViewAll extends React.Component {
         let list = [];
         for (let l of this.state.recipesList) {
             list.push(
-                <div className="box col-12 p-2 mt-2">
+                <div className="box col-12 p-2 mt-2" key={l._id}>
                     <div className="image-container col-12 col-md-4">
                         <img src={l.resource.img_url} className="test-img" alt="recipe"></img>
                     </div>
