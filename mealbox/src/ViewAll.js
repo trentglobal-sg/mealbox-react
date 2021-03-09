@@ -39,11 +39,33 @@ export default class ViewAll extends React.Component {
         return list
     }
 
-    render(){
+    render() {
         return (
-            <React.Fragment>    
-                
-                {this.renderList()}
+            <React.Fragment>
+                <div className="container">
+                    <div className="row">
+                        <h1 className="col-12" style={{
+                            textAlign: "center"
+                        }}>View All
+                        </h1>
+
+                        <div className="box col-4">
+                                <div className="image-container">
+                                    {/* <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Fettuccine-Carbonara_exps175448_SD143205B01_28_2bC_RMS.jpg" className="test-img"alt="recipe"></img> */}
+                                </div>
+                                <div className="des-container">
+                                    <p>Title</p>
+                                    <p>Description</p>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </div>
+                        </div>
+                        <div className="box col-4"></div>
+                        <div className="box col-4"></div>
+
+                    </div>
+                    {this.renderList()}
+                </div>
             </React.Fragment>
         )
     }
