@@ -79,9 +79,6 @@ export default class CreateRecipe extends React.Component {
 
     // Adding a new recipe
     add = async (e) => {
-        // Checking if all the state is not null. 
-        
-
         // Update resource Collections first
         let newResource = {
             img_url: this.state.img_url
@@ -170,7 +167,7 @@ export default class CreateRecipe extends React.Component {
                                             <option>Italian</option>
                                             <option>Japanese</option>
                                         </select>
-                                        <span className="warning-text">*Select cuisine type.</span>
+                                        <span className="warning-text">*Select a cuisine type.</span>
                                     </div>
                                 </div>
 
