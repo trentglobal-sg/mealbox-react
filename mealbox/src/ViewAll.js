@@ -49,19 +49,20 @@ export default class ViewAll extends React.Component {
                         }}>View All
                         </h1>
 
-                        <div className="box col-4">
+                        <div className="box col-12 col-md-6 col-lg-4 p-2">
                                 <div className="image-container">
-                                    {/* <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Fettuccine-Carbonara_exps175448_SD143205B01_28_2bC_RMS.jpg" className="test-img"alt="recipe"></img> */}
+                                    <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Fettuccine-Carbonara_exps175448_SD143205B01_28_2bC_RMS.jpg" className="test-img"alt="recipe"></img>
                                 </div>
-                                <div className="des-container">
-                                    <p>Title</p>
-                                    <p>Description</p>
+                                <div className="des-container mt-2">
+                                    <h4>Fettuccini Carbonara</h4>
+                                    <p>This carbonara is a delectable, mouth watering pile of yummy goodness. I recommend a nice salad with it - that's all you will need for a complete meal.</p>
+                                    <p>By: Sarah J.Pixy</p>
                                     <button>Edit</button>
                                     <button>Delete</button>
                                 </div>
                         </div>
-                        <div className="box col-4"></div>
-                        <div className="box col-4"></div>
+                        <div className="box col-12 col-md-6 col-lg-4 p-2"></div>
+                        <div className="box col-12 col-md-6 col-lg-4 p-2"></div>
 
                     </div>
                     {this.renderList()}
