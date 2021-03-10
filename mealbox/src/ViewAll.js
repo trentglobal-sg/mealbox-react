@@ -16,6 +16,18 @@ export default class ViewAll extends React.Component {
         })
     }
 
+    deleteRecipe = async (e) => {
+        let index = this.state.recipesList.findIndex(i=> i._id === e.target.value)
+
+        // To delete from recipes collection
+        await axios.delete(baseURL + "/recipes/" + e.target.value)
+        // To delete from resource collection
+        await axios.delete(baseURL + "/resources/" + this.state.recipesList[index].resource._id)
+        this.setState({
+            recipesList: [...this.state.recipesList.slice(0,index), ...this.state.recipesList.slice(index + 1)]
+        })
+    }
+
     renderList = () => {
         let list = [];
         for (let l of this.state.recipesList) {
@@ -30,7 +42,7 @@ export default class ViewAll extends React.Component {
                         <p>By: <strong>{l.created_by}</strong></p>
                         <div className="des-buttons">
                             <button className="btn action-buttons btn-success">Edit</button>
-                            <button className="btn action-buttons btn-danger ml-2">Delete</button>
+                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
                         </div>
                     </div>
                 </div>
