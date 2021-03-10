@@ -9,10 +9,10 @@ export default class Header extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <nav className="navbar navbar-dark bg-dark">
+                <nav className="navbar">
                         <img src={require("./logo.png").default} width="50" height="50" className="d-inline-block" alt="" /> 
                         <p className="my-auto ml-2" style={{
-                            color:"white"
+                            fontWeight: "bold"
                         }}>MealBox</p>
                 </nav>
             </React.Fragment>

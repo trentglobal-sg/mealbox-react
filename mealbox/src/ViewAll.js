@@ -17,14 +17,14 @@ export default class ViewAll extends React.Component {
     }
 
     deleteRecipe = async (e) => {
-        let index = this.state.recipesList.findIndex(i=> i._id === e.target.value)
+        let index = this.state.recipesList.findIndex(i => i._id === e.target.value)
 
         // To delete from recipes collection
         await axios.delete(baseURL + "/recipes/" + e.target.value)
         // To delete from resource collection
         await axios.delete(baseURL + "/resources/" + this.state.recipesList[index].resource._id)
         this.setState({
-            recipesList: [...this.state.recipesList.slice(0,index), ...this.state.recipesList.slice(index + 1)]
+            recipesList: [...this.state.recipesList.slice(0, index), ...this.state.recipesList.slice(index + 1)]
         })
     }
 
@@ -40,7 +40,7 @@ export default class ViewAll extends React.Component {
                         <h4>{l.recipe_name}</h4>
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
-                        <div className="des-buttons">
+                        <div className="des-buttons mt-2">
                             <button className="btn action-buttons btn-success">Edit</button>
                             <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
                         </div>
@@ -54,18 +54,23 @@ export default class ViewAll extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="hero-img">
-                    <div className="cover-overlay"></div>
+                <div className="hero-wrapper">
+                    <div className="home-hero-img">
+                        <p className="hero-title">
+                            <h2>Recreate</h2>
+                            <h2>Recipe</h2>
+                            <p>Looking to recreate a dish?</p>
+                            <p>Find it a hassle to buy ingredients?</p>
+                            <p>With a single delivery you will have all you need. </p>
+
+
+                        </p>
+                        <div className="cover-overlay"></div>
+                    </div>
                 </div>
                 <div className="container">
-                    <div className="row">
-                        <h1 className="col-12" style={{
-                            textAlign: "center"
-                        }}>View All
-                        </h1>
+                    {/* <div className="row"></div> */}
 
-
-                    </div>
                     <div className="filter-bar">
                         <input type="text" className="form-control my-1 mx-sm-2" name="search-field" placeholder="Search Recipe Name" />
                         <select className="form-control cuisine-bar my-1 mx-sm-2" name="cuisine_type" value={this.state.cuisine_type}>
