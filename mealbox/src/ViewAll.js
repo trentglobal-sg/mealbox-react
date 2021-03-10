@@ -54,6 +54,7 @@ export default class ViewAll extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <div className="container">
                 <div className="hero-wrapper">
                     <div className="home-hero-img">
                         <p className="hero-title">
@@ -68,7 +69,7 @@ export default class ViewAll extends React.Component {
                         <div className="cover-overlay"></div>
                     </div>
                 </div>
-                <div className="container">
+                {/* <div className="container"> */}
                     {/* <div className="row"></div> */}
 
                     <div className="filter-bar">
