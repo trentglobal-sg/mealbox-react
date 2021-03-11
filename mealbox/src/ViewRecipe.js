@@ -24,7 +24,9 @@ export default class ViewRecipe extends React.Component {
         resource: {
             "_id": "60459d5da0c035371015c0dd",
             "img_url": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3727226.jpg"
-        }
+        },
+        comment_name: "",
+        comment:""
     }
 
     renderTags = () => {
@@ -36,19 +38,25 @@ export default class ViewRecipe extends React.Component {
     }
     renderIngredient = () => {
         let list = [];
-        for (let l of this.state.ingredients){
-        list.push(<p>{l}</p>)
+        for (let l of this.state.ingredients) {
+            list.push(<p>{l}</p>)
         }
         return list
     }
 
+    updateField = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     renderDirections = () => {
         let list = [];
-            list.push(this.state.instructions.map((instruction, index) => (
+        list.push(this.state.instructions.map((instruction, index) => (
             <React.Fragment>
                 <h5 key={index}>Step {index + 1} </h5> <p>{instruction}</p>
             </React.Fragment>
-            )))
+        )))
         return list
     }
     render() {
@@ -82,11 +90,35 @@ export default class ViewRecipe extends React.Component {
                             {this.renderIngredient()}
                         </div>
                     </div>
-                        <hr></hr>
+                    <hr></hr>
                     <div>
                         <h3>Directions</h3>
                         <div className="col-12 col-md-10">
                             {this.renderDirections()}
+                        </div>
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <h3>Reviews</h3>
+                    </div>
+                    <div className="comment-wrapper">
+                        <div className="form-group p-2 mb-0">
+                            <label>
+                                Your Name:
+                                        </label>
+                            <input type="text" name="comment_name" className="form-control" value={this.state.comment_name} onChange={this.updateField} placeholder="Eg. John Dee" />
+                        </div>
+                        <div className="form-group p-2 mb-0">
+                            <label>
+                                Review:
+                                        </label>
+                            <input type="text" name="comment" className="form-control" value={this.state.comment} onChange={this.updateField} placeholder="Describe your experience!" />
+                        </div>
+                        <div style={{
+                        textAlign:"center"
+                        }}>
+
+                        <button className="comment-submit btn-success ml-auto mb-2">Submit</button>
                         </div>
                     </div>
                 </div>

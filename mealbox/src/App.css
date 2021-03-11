@@ -144,6 +144,16 @@ h4{
     background-position: center;
 }
 
+.comment-wrapper{
+    background-color: #FFDFBA;
+    height:105%;
+}
+
+.comment-submit{
+    width:150px;
+    border-radius: 20px;
+}
+
 @media only screen and (max-width: 767px){
   .box{
       height:500px;
