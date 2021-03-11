@@ -28,20 +28,25 @@ export default class ViewAll extends React.Component {
         })
     }
 
+    alertBox = () => {
+        alert("You've clicked the title box")
+    }
+
     renderList = () => {
         let list = [];
         for (let l of this.state.recipesList) {
             list.push(
                 <div className="box col-12 p-2 mt-2" key={l._id}>
-                    <div className="image-container col-12 col-md-4">
-                        <img src={l.resource.img_url} className="test-img" alt="recipe"></img>
+                    <div style={{
+                        backgroundImage: `url(${l.resource.img_url})`
+                    }} className="image-container col-12 col-md-4">
                     </div>
                     <div className="des-container col-12 col-md-8 mt-2">
-                        <h4>{l.recipe_name}</h4>
+                        <h4 onClick={this.alertBox}>{l.recipe_name}</h4>
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
                         <div className="des-buttons mt-2">
-                            <button className="btn action-buttons btn-success">Edit</button>
+                            <button className="btn action-buttons btn-success" >Edit</button>
                             <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
                         </div>
                     </div>

@@ -87,12 +87,10 @@
 }
 
 .image-container{
-    overflow: hidden;
     height:100%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 20px;
+    background-size: cover;
+    background-position: center
 }
 
 .des-container{
@@ -100,7 +98,8 @@
 }
 
 .test-img{
-    max-height:100%
+    width:100%;
+    border-radius:20px;
 }
 
 .des-buttons{
@@ -115,6 +114,11 @@
     display:flex
 }
 
+
+h4{
+    cursor:pointer;
+}
+
 @media only screen and (max-width: 767px){
   .box{
       height:500px;
@@ -125,9 +129,6 @@
   }
   .des-container{
       height:50%
-  }
-  .test-img{
-      max-width: 100%;
   }
   .des-buttons{
       right:10%;
