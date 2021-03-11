@@ -1,3 +1,7 @@
+#root{
+    background-image: url("white_wall_hash.png");
+    /* background-color:red; */
+}
 .navbar{
     justify-content: flex-start !important;
 }
