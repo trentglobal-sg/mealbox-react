@@ -3,14 +3,16 @@ import './App.css';
 // import CreateRecipe from './CreateRecipe'
 import Header from "./Header"
 import Footer from "./Footer"
-import ViewAll from "./ViewAll"
+// import ViewAll from "./ViewAll"
+import ViewRecipe from "./ViewRecipe"
 
 function App() {
   return (
     <div className="App">
         <Header/>
         {/* <CreateRecipe/> */}
-        <ViewAll/>
+        {/* <ViewAll/> */}
+        <ViewRecipe/>
         {/* <AddComments/> */}
         <Footer/>
     </div>
