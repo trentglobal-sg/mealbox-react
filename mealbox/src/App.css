@@ -154,6 +154,9 @@ h4{
     border-radius: 20px;
 }
 
+.space{
+    height:10px;
+}
 @media only screen and (max-width: 767px){
   .box{
       height:500px;

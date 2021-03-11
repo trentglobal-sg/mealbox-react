@@ -1,12 +1,14 @@
 import React from "react"
-// import axios from "axios"
+import axios from "axios"
 
-// const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
+const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
 
 
 export default class ViewRecipe extends React.Component {
     state = {
         recipesList: [],
+        commentsList: [],
+        _id:"6041a71cbc372816b15bebbf",
         recipe_name: "Spaghetti Aglio o Olio",
         description: "No two spaghetti aglio e olio recipes are alike, but this one is pretty true to the classic method.",
         ingredients: ["1 pound uncooked spaghetti", "6 cloves garlic, thinly sliced", "Half cup olive oil", "Quarter teaspoon red pepper falkes, or to taste", "saly and freshly ground black pepper to taste", "Quarter cup chopped fresh Italian parsley", "1 cup finely grated Parmigiano-Reggiano cheese"],
@@ -26,20 +28,29 @@ export default class ViewRecipe extends React.Component {
             "img_url": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F3727226.jpg"
         },
         comment_name: "",
-        comment:""
+        comment: ""
+    }
+
+    addComment = async()=>{
+        let newComment={
+            recipe_id: this.state._id,
+            username: this.state.comment_name,
+            comments: this.state.comment
+        }
+        await axios.post(baseURL+"/comments", newComment)
     }
 
     renderTags = () => {
         let list = [];
         for (let l of this.state.tags) {
-            list.push(<p className="tags-view">{l}</p>)
+            list.push(<p className="tags-view" key={l}>{l}</p>)
         }
         return list
     }
     renderIngredient = () => {
         let list = [];
         for (let l of this.state.ingredients) {
-            list.push(<p>{l}</p>)
+            list.push(<p key={l}>{l}</p>)
         }
         return list
     }
@@ -112,14 +123,21 @@ export default class ViewRecipe extends React.Component {
                             <label>
                                 Review:
                                         </label>
-                            <input type="text" name="comment" className="form-control" value={this.state.comment} onChange={this.updateField} placeholder="Describe your experience!" />
+                            <textarea name="comment" className="form-control create-textarea" rows="2" cols="30" value={this.state.comment} onChange={this.updateField} placeholder="Describe your experience!"></textarea>
                         </div>
                         <div style={{
-                        textAlign:"center"
+                            textAlign: "center"
                         }}>
 
-                        <button className="comment-submit btn-success ml-auto mb-2">Submit</button>
+                            <button className="comment-submit btn-success ml-auto" onClick={this.addComment}>Submit</button>
                         </div>
+                        <hr></hr>
+                        <div className="p-2">
+                            <h6>Name</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                        </div>
+                        <hr></hr>
+                        <div className="space"></div>
                     </div>
                 </div>
             </React.Fragment>
