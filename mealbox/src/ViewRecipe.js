@@ -40,14 +40,22 @@ export default class ViewRecipe extends React.Component {
                 <div className="container">
                     <h1>{this.state.recipe_name}</h1>
                     <div className="tags-wrapper">{this.renderTags()}</div>
-        <p>{this.state.description}</p>
-                    <p>By: </p>
-                    <div className="row">
-                        <div className="box col-8">
-                            Image
+                    <p>{this.state.description}</p>
+                    <p>By: <strong>{this.state.created_by}</strong></p>
+                    <div className="row p-2">
+                        <div style={{
+                            backgroundImage: `url(${this.state.resource.img_url})`
+                        }} className="individual-box image-container col-8">
+
                         </div>
-                        <div className="box col-4">
-                            Cooking details
+                        <div className="col-4">
+                            <div className="detail-box">
+                                <p>Cook: {this.state.cooking_time}</p>
+                                <p>Prep: {this.state.preparation_time}</p>
+                                <p>Serving: {this.state.serving}</p>
+                                <p>Difficulty: {this.state.difficulty}</p>
+                                <p>Cuisine Type: {this.state.cuisine_type}</p>
+                            </div>
                         </div>
                     </div>
                     <div>

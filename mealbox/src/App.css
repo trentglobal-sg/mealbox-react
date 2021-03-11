@@ -114,6 +114,13 @@
     display:flex
 }
 
+.detail-box{
+    border:1px solid black;
+    width:100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
 
 h4{
     cursor:pointer;
@@ -129,6 +136,9 @@ h4{
     padding: 5px;
     border-radius:10px;
     font-size:12px;
+}
+.individual-box{
+    height:500px;
 }
 
 @media only screen and (max-width: 767px){
