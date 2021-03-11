@@ -34,6 +34,23 @@ export default class ViewRecipe extends React.Component {
         }
         return list
     }
+    renderIngredient = () => {
+        let list = [];
+        for (let l of this.state.ingredients){
+        list.push(<p>{l}</p>)
+        }
+        return list
+    }
+
+    renderDirections = () => {
+        let list = [];
+            list.push(this.state.instructions.map((instruction, index) => (
+            <React.Fragment>
+                <h5 key={index}>Step {index + 1} </h5> <p>{instruction}</p>
+            </React.Fragment>
+            )))
+        return list
+    }
     render() {
         return (
             <React.Fragment>
@@ -60,17 +77,11 @@ export default class ViewRecipe extends React.Component {
                     </div>
                     <div>
                         <h3>Ingredients</h3>
-                        <p>Ingredient 1</p>
-                        <p>Ingredient 2</p>
-                        <p>Ingredient 3</p>
-                        <p>Ingredient 4</p>
+                        {this.renderIngredient()}
                     </div>
                     <div>
                         <h3>Directions</h3>
-                        <p>Directions 1</p>
-                        <p>Directions 2</p>
-                        <p>Directions 3</p>
-                        <p>Directions 4</p>
+                        {this.renderDirections()}
                     </div>
                 </div>
             </React.Fragment>
