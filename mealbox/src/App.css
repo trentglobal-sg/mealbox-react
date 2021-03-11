@@ -139,6 +139,9 @@ h4{
 }
 .individual-box{
     height:500px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
 }
 
 @media only screen and (max-width: 767px){

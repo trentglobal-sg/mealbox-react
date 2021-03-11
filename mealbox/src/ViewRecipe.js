@@ -62,26 +62,32 @@ export default class ViewRecipe extends React.Component {
                     <div className="row p-2">
                         <div style={{
                             backgroundImage: `url(${this.state.resource.img_url})`
-                        }} className="individual-box image-container col-8">
+                        }} className="individual-box col-12 col-md-8">
 
                         </div>
-                        <div className="col-4">
+                        <div className="col-12 col-md-4 mt-2 mt-md-0">
                             <div className="detail-box">
-                                <p>Cook: {this.state.cooking_time}</p>
-                                <p>Prep: {this.state.preparation_time}</p>
-                                <p>Serving: {this.state.serving}</p>
-                                <p>Difficulty: {this.state.difficulty}</p>
-                                <p>Cuisine Type: {this.state.cuisine_type}</p>
+                                <p><strong>Cook: </strong> {this.state.cooking_time}</p>
+                                <p><strong>Prep: </strong> {this.state.preparation_time}</p>
+                                <p><strong>Serving: </strong> {this.state.serving}</p>
+                                <p><strong>Difficulty: </strong> {this.state.difficulty}</p>
+                                <p><strong>Cuisine Type: </strong> {this.state.cuisine_type}</p>
                             </div>
                         </div>
                     </div>
                     <div>
+                        <hr></hr>
                         <h3>Ingredients</h3>
-                        {this.renderIngredient()}
+                        <div className="col-12 col-md-10">
+                            {this.renderIngredient()}
+                        </div>
                     </div>
+                        <hr></hr>
                     <div>
                         <h3>Directions</h3>
-                        {this.renderDirections()}
+                        <div className="col-12 col-md-10">
+                            {this.renderDirections()}
+                        </div>
                     </div>
                 </div>
             </React.Fragment>
