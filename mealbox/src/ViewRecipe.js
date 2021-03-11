@@ -70,6 +70,7 @@ export default class ViewRecipe extends React.Component {
         )))
         return list
     }
+
     render() {
         return (
             <React.Fragment>

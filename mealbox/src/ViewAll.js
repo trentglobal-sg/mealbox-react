@@ -28,7 +28,7 @@ export default class ViewAll extends React.Component {
         })
     }
 
-    alertBox = () => {
+    alertBox = (e) => {
         alert("You've clicked the title box")
     }
 
