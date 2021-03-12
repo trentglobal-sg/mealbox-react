@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import {Link} from "react-router-dom"
 
 const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
 
@@ -42,7 +43,7 @@ export default class ViewAll extends React.Component {
                     }} className="image-container col-12 col-md-4">
                     </div>
                     <div className="des-container col-12 col-md-8 mt-2">
-                        <h4 onClick={this.alertBox}>{l.recipe_name}</h4>
+                    <Link to={"/view/"+l._id}>{l.recipe_name}</Link>
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
                         <div className="des-buttons mt-2">

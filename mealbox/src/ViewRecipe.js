@@ -31,6 +31,13 @@ export default class ViewRecipe extends React.Component {
         comment: ""
     }
 
+    componentDidMount(){
+        let recipe_id = this.props.match.params.l_id;
+        this.setState({
+            recipe_id: recipe_id
+        })
+    }
+
     addComment = async()=>{
         let newComment={
             recipe_id: this.state._id,

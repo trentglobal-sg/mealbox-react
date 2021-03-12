@@ -18,20 +18,22 @@ function App() {
                     </li>
                     <li>
                         <Link to="/create-recipe">Create Recipe</Link>
-                    </li><li>
-                        <Link to="/view-all">View Recipe</Link>
                     </li>
                 </ul>
             </nav>
             <Switch>
-                <Route exact path="/">
-                    <ViewAll/>
+                <Route exact path="/" render={props=>{
+                    return <ViewAll {...props}/>
+                }}>
+                 
                 </Route>
                 <Route exact path="/create-recipe">
                     <CreateRecipe/>
                 </Route>
-                <Route exact path="/view-all">
-                    <ViewRecipe />
+                <Route exact path="/view/:l_id" render={props=>{
+                    return <ViewRecipe {...props}/>
+                }}>
+                    {/* <ViewRecipe /> */}
                 </Route>
             </Switch>
         </Router>
