@@ -35,6 +35,10 @@ export default class ViewRecipe extends React.Component {
             comments: this.state.comment
         }
         await axios.post(baseURL + "/comments", newComment)
+        
+        this.setState({
+            commentsList: [...this.state.commentsList, newComment]
+        })
     }
 
     renderTags = () => {
