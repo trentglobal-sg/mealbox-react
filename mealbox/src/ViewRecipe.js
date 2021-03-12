@@ -17,10 +17,14 @@ export default class ViewRecipe extends React.Component {
         let response = await axios.post(baseURL + "/recipes/individual", {
             recipe_id: recipe_id
         })
-
+        let response2 = await axios.post(baseURL + "/comments/individual", {
+            recipe_id: recipe_id
+        })
+        console.log(response2.data)
         this.setState({
             isLoaded: true,
-            individualRecipe: response.data
+            individualRecipe: response.data,
+            commentsList: response2.data
         })
     }
 
@@ -34,7 +38,6 @@ export default class ViewRecipe extends React.Component {
     }
 
     renderTags = () => {
-        console.log(this.state.individualRecipe.tags)
         let list = [];
         for (let l of this.state.individualRecipe.tags) {
             list.push(<p className="tags-view" key={l}>{l}</p>)
@@ -62,6 +65,27 @@ export default class ViewRecipe extends React.Component {
                 <h5 key={index}>Step {index + 1} </h5> <p>{instruction}</p>
             </React.Fragment>
         )))
+        return list
+    }
+
+    renderComments = () => {
+        let list = [];
+        if (this.state.commentsList[0] == null) {
+            list.push(
+                <div className="p-2" style={{
+                    textAlign:"center"
+                }}>Be the first to review this recipe!</div>
+            )
+        } else {
+            for (let l of this.state.commentsList) {
+                list.push(
+                    <div className="p-2">
+                        <h6>{l.username}</h6>
+                        <p>{l.comments}</p>
+                    </div>
+                )
+            }
+        }
         return list
     }
 
@@ -132,10 +156,7 @@ export default class ViewRecipe extends React.Component {
                                 <button className="comment-submit btn-success ml-auto" onClick={this.addComment}>Submit</button>
                             </div>
                             <hr></hr>
-                            <div className="p-2">
-                                <h6>Name</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
-                            </div>
+                            {this.renderComments()}
                             <hr></hr>
                             <div className="space"></div>
                         </div>
