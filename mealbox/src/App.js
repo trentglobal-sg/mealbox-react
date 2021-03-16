@@ -17,7 +17,7 @@ function App() {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/create-recipe">Create Recipe</Link>
+                        <Link to="/new">Create Recipe</Link>
                     </li>
                 </ul>
             </nav>
@@ -27,7 +27,7 @@ function App() {
                 }}>
                  
                 </Route>
-                <Route exact path="/create-recipe">
+                <Route exact path="/new">
                     <CreateRecipe/>
                 </Route>
                 <Route exact path="/view/:l_id" render={props=>{

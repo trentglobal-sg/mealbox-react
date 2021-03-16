@@ -24,18 +24,30 @@ export default class CreateRecipe extends React.Component {
 
 
     }
-    
+
     // Setting up flags to do editing using CreateRecipe.js
     // When there is a params, set a new state call recipe_id
-    async componentDidMount(){
-        if(this.props.match != undefined){
+    async componentDidMount() {
+        if (this.props.match != undefined) {
             let recipe_id = this.props.match.params.l_id;
-            let response = await axios.post(baseURL + "/recipes/individual",{
-                recipe_id : recipe_id
+            let response = await axios.post(baseURL + "/recipes/individual", {
+                recipe_id: recipe_id
             })
             // console.log(response.data)
             this.setState({
-                recipe_id: recipe_id
+                recipe_id: recipe_id,
+                recipe_name: response.data.recipe_name,
+                description: response.data.description,
+                ingredients: response.data.ingredients,
+                cuisine_type: response.data.cuisine_type,
+                tags: response.data.tags,
+                instructions: response.data.instructions,
+                difficulty: response.data.difficulty,
+                cooking_time: response.data.cooking_time,
+                preparation_time: response.data.preparation_time,
+                serving: response.data.serving,
+                created_by: response.data.created_by,
+                img_url: response.data.resource.img_url
             })
         }
     }
@@ -116,11 +128,11 @@ export default class CreateRecipe extends React.Component {
                         <div className="col-xl-8 col-11 mx-auto my-auto">
                             <section className="row">
                                 <h1 className="col-12" style={{
-                                    textAlign:"center",
+                                    textAlign: "center",
                                     display: this.state.recipe_id == null ? "block" : "none"
                                 }}>Create Recipe</h1>
                                 <h1 className="col-12" style={{
-                                    textAlign:"center",
+                                    textAlign: "center",
                                     display: this.state.recipe_id != null ? "block" : "none"
                                 }}>Edit Recipe</h1>
                                 {/* Left Box  */}
@@ -195,7 +207,7 @@ export default class CreateRecipe extends React.Component {
                                             <input type="radio" name="difficulty" className="mr-1" value="Moderate" onChange={this.updateField} checked={this.state.difficulty === "Moderate"} /><label className="mr-2">Moderate</label>
                                             <input type="radio" name="difficulty" className="mr-1" value="Hard" onChange={this.updateField} checked={this.state.difficulty === "Hard"} /><label className="mr-2">Hard</label>
                                         </div>
-                                            {/* <span className="warning-text">*Select one difficulty.</span> */}
+                                        {/* <span className="warning-text">*Select one difficulty.</span> */}
                                     </div>
                                 </div>
 
@@ -252,11 +264,11 @@ export default class CreateRecipe extends React.Component {
                                         <button style={{
                                             display: this.state.recipe_id == null ? "inline-block" : "none"
                                         }}
-                                        className="btn action-buttons btn-warning"  onClick={this.add}>Create</button>
+                                            className="btn action-buttons btn-warning" onClick={this.add}>Create</button>
                                         <button style={{
                                             display: this.state.recipe_id != null ? "inline-block" : "none"
                                         }}
-                                        className="btn action-buttons btn-warning"  onClick={this.edit}>Submit</button>
+                                            className="btn action-buttons btn-warning" onClick={this.edit}>Submit</button>
                                         <button className="btn action-buttons btn-secondary ml-2" >Cancel</button>
                                     </div>
 
