@@ -47,6 +47,7 @@ export default class ViewAll extends React.Component {
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
                         <div className="des-buttons mt-2">
+                            <Link to={"/edit/"+l._id}>Edit</Link>
                             <button className="btn action-buttons btn-success" >Edit</button>
                             <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
                         </div>

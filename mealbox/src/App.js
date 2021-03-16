@@ -33,18 +33,13 @@ function App() {
                 <Route exact path="/view/:l_id" render={props=>{
                     return <ViewRecipe {...props}/>
                 }}>
-                    {/* <ViewRecipe /> */}
+                </Route>
+                   <Route exact path="/edit/:l_id" render={props=>{
+                    return <CreateRecipe {...props}/>
+                }}>
                 </Route>
             </Switch>
         </Router>
-        // <div className="App">
-        //     <Header/>
-        //     {/* <CreateRecipe/> */}
-        //     {/* <ViewAll/> */}
-        //     <ViewRecipe/>
-        //     {/* <AddComments/> */}
-        //     <Footer/>
-        // </div>
     );
 }
 

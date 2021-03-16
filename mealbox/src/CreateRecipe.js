@@ -24,6 +24,18 @@ export default class CreateRecipe extends React.Component {
 
 
     }
+    
+    // Setting up flags to do editing using CreateRecipe.js
+    // When there is a params, set a new state call recipe_id
+    async componentDidMount(){
+        if(this.props.match != undefined){
+            let recipe_id = this.props.match.params.l_id;
+            this.setState({
+                recipe_id: recipe_id
+            })
+        }
+    }
+
 
     // Generic update form; ensure name in state is the same as name in form
     updateField = (e) => {
@@ -100,8 +112,13 @@ export default class CreateRecipe extends React.Component {
                         <div className="col-xl-8 col-11 mx-auto my-auto">
                             <section className="row">
                                 <h1 className="col-12" style={{
-                                    textAlign:"center"
+                                    textAlign:"center",
+                                    display: this.state.recipe_id == null ? "block" : "none"
                                 }}>Create Recipe</h1>
+                                <h1 className="col-12" style={{
+                                    textAlign:"center",
+                                    display: this.state.recipe_id != null ? "block" : "none"
+                                }}>Edit Recipe</h1>
                                 {/* Left Box  */}
                                 <div className="col-lg-8 col-12 left-box">
                                     <div className="form-group">
@@ -109,21 +126,21 @@ export default class CreateRecipe extends React.Component {
                                             Your Name:
                                         </label>
                                         <input type="text" name="created_by" className="form-control" value={this.state.created_by} onChange={this.updateField} required />
-                                        <span className="warning-text">*Name must be at least 3 characters long.</span>
+                                        {/* <span className="warning-text">*Name must be at least 3 characters long.</span> */}
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Recipe Name:
                                         </label>
                                         <input type="text" name="recipe_name" className="form-control" value={this.state.recipe_name} onChange={this.updateField} />
-                                        <span className="warning-text">*Recipe name must be at least 3 characters long.</span>
+                                        {/* <span className="warning-text">*Recipe name must be at least 3 characters long.</span> */}
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Recipe Image URL:
                                         </label>
                                         <input type="text" name="img_url" className="form-control" value={this.state.img_url} onChange={this.updateField} />
-                                        <span className="warning-text">*URL cannot be empty.</span>
+                                        {/* <span className="warning-text">*URL cannot be empty.</span> */}
                                     </div>
                                     <div>
                                         <label>
@@ -136,7 +153,7 @@ export default class CreateRecipe extends React.Component {
                                             <option>Italian</option>
                                             <option>Japanese</option>
                                         </select>
-                                        <span className="warning-text">*Select a cuisine type.</span>
+                                        {/* <span className="warning-text">*Select a cuisine type.</span> */}
                                     </div>
                                 </div>
 
@@ -147,14 +164,14 @@ export default class CreateRecipe extends React.Component {
                                             Cooking Time:
                                          </label>
                                         <input type="text" name="cooking_time" className="form-control" value={this.state.cooking_time} onChange={this.updateField} />
-                                        <span className="warning-text">*Cooking time cannot be empty.</span>
+                                        {/* <span className="warning-text">*Cooking time cannot be empty.</span> */}
                                     </div>
                                     <div className="form-group">
                                         <label>
                                             Preparation Time:
                                         </label>
                                         <input type="text" name="preparation_time" className="form-control" value={this.state.preparation_time} onChange={this.updateField} />
-                                        <span className="warning-text">*Preparation time cannot be empty.</span>
+                                        {/* <span className="warning-text">*Preparation time cannot be empty.</span> */}
 
                                     </div>
                                     <div className="form-group">
@@ -162,7 +179,7 @@ export default class CreateRecipe extends React.Component {
                                             Serving Size:
                                         </label>
                                         <input type="text" name="serving" className="form-control" value={this.state.serving} onChange={this.updateField} />
-                                        <span className="warning-text">*Serving size cannot be empty.</span>
+                                        {/* <span className="warning-text">*Serving size cannot be empty.</span> */}
                                     </div>
                                     <div>
                                         <label>Difficulty:</label>
@@ -174,7 +191,7 @@ export default class CreateRecipe extends React.Component {
                                             <input type="radio" name="difficulty" className="mr-1" value="Moderate" onChange={this.updateField} checked={this.state.difficulty === "Moderate"} /><label className="mr-2">Moderate</label>
                                             <input type="radio" name="difficulty" className="mr-1" value="Hard" onChange={this.updateField} checked={this.state.difficulty === "Hard"} /><label className="mr-2">Hard</label>
                                         </div>
-                                            <span className="warning-text">*Select one difficulty.</span>
+                                            {/* <span className="warning-text">*Select one difficulty.</span> */}
                                     </div>
                                 </div>
 
@@ -184,7 +201,7 @@ export default class CreateRecipe extends React.Component {
                                             Description:
                                         </label>
                                         <input type="text" name="description" className="form-control description-textarea" value={this.state.description} onChange={this.updateField} />
-                                        <span className="warning-text">*Description cannot be empty or more than 100 characters.</span>
+                                        {/* <span className="warning-text">*Description cannot be empty or more than 100 characters.</span> */}
                                     </div>
                                     <div>
                                         <label>Tags:</label>
@@ -208,33 +225,39 @@ export default class CreateRecipe extends React.Component {
                                                 <input type="checkbox" name="tags" value="Suitable For All" onChange={this.updateTags} checked={this.state.tags.includes("Suitable For All")} /><label className="ml-2">Suitable For All</label>
                                             </div>
                                         </div>
-                                        <span className="warning-text">*Select at least one tag</span>
+                                        {/* <span className="warning-text">*Select at least one tag</span> */}
                                     </div>
                                     <div>
                                         <label>Ingredients:</label>
                                         <div>
                                             <textarea name="ingredients" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each ingredients by a comma" value={this.state.ingredients} onChange={this.updateField}></textarea>
                                         </div>
-                                        <span className="warning-text">*Ingredients cannot be empty</span>
+                                        {/* <span className="warning-text">*Ingredients cannot be empty</span> */}
                                     </div>
                                     <div>
                                         <label>Instructions:</label>
                                         <div>
                                             <textarea name="instructions" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each instructions by a comma" value={this.state.instructions} onChange={this.updateField}></textarea>
                                         </div>
-                                        <span className="warning-text">*Instructions cannot be empty</span>
+                                        {/* <span className="warning-text">*Instructions cannot be empty</span> */}
                                     </div>
 
                                     <div className="mt-2" style={{
                                         textAlign: "center"
                                     }}>
-                                        <button className="btn action-buttons btn-warning"  onClick={this.add}>Create</button>
+                                        <button style={{
+                                            display: this.state.recipe_id == null ? "inline-block" : "none"
+                                        }}
+                                        className="btn action-buttons btn-warning"  onClick={this.add}>Create</button>
+                                        <button style={{
+                                            display: this.state.recipe_id != null ? "inline-block" : "none"
+                                        }}
+                                        className="btn action-buttons btn-warning"  onClick={this.edit}>Submit</button>
                                         <button className="btn action-buttons btn-secondary ml-2" >Cancel</button>
                                     </div>
 
                                 </section>
                             </section>
-                            {/* {this.renderList()} */}
                         </div>
                     </section>
                 </div>
