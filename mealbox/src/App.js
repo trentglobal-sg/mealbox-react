@@ -6,11 +6,14 @@ import CreateRecipe from './CreateRecipe'
 import ViewAll from "./ViewAll"
 import ViewRecipe from "./ViewRecipe"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ScrollToTop from './ScrollToTop';
 
 
 function App() {
     return (
         <Router>
+            <ScrollToTop>
+
             <nav>
                 <ul>
                     <li>
@@ -39,6 +42,8 @@ function App() {
                 }}>
                 </Route>
             </Switch>
+            </ScrollToTop>
+
         </Router>
     );
 }
