@@ -39,16 +39,15 @@ export default class CreateRecipe extends React.Component {
                 recipe_id: recipe_id,
                 recipe_name: response.data.recipe_name,
                 description: response.data.description,
-                ingredients: response.data.ingredients,
+                ingredients: response.data.ingredients.join(" ! "),
                 cuisine_type: response.data.cuisine_type,
                 tags: response.data.tags,
-                instructions: response.data.instructions,
+                instructions: response.data.instructions.join(" ! "),
                 difficulty: response.data.difficulty,
                 cooking_time: response.data.cooking_time,
                 preparation_time: response.data.preparation_time,
                 serving: response.data.serving,
                 created_by: response.data.created_by,
-                created_on: response.data.created_on,
                 //Resource Collection
                 resource_id: response.data.resource._id,
                 img_url: response.data.resource.img_url,
@@ -84,7 +83,7 @@ export default class CreateRecipe extends React.Component {
 
 
     // Adding a new recipe
-    add = async (e) => {
+    add = async () => {
         // Update resource Collections first
         let newResource = {
             img_url: this.state.img_url
@@ -94,7 +93,7 @@ export default class CreateRecipe extends React.Component {
         let newResourceID = resourceResponse.data.insertedId
 
         // Can just split with (",") 
-        let regExp = /\s*,\s*/;
+        let regExp = /\s*!\s*/;
         let newIngredients = this.state.ingredients.split(regExp)
         let newInstructions = this.state.instructions.split(regExp)
         let newRecipe = {
@@ -117,14 +116,44 @@ export default class CreateRecipe extends React.Component {
 
         // Posting the comment to db using API link
         let recipeResponse = await axios.post(baseURL + "/recipes", newRecipe)
-
-        newRecipe._id = recipeResponse.data.insertedId
-        newRecipe.created_on = recipeResponse.data.ops[0].created_on
-
-        this.setState({
-            recipesList: [...this.state.recipesList, newRecipe]
-        })
+        console.log(resourceResponse.data)
+        console.log(recipeResponse.data)
     }
+    
+    edit = async () => {
+        // Update Resource Collections First
+        let newResource = {
+            _id : this.state.resource_id,
+            img_url: this.state.img_url
+        }
+        let response = await axios.put(baseURL + "/resources", newResource)
+        console.log(response.data)
+        // Update Recipe Collections
+        let regExp = /\s*!\s*/;
+        let newIngredients = this.state.ingredients.split(regExp)
+        let newInstructions = this.state.instructions.split(regExp)
+        let newRecipe = {
+            recipe_id: this.state.recipe_id,
+            ingredients: newIngredients,
+            instructions: newInstructions,
+            recipe_name: this.state.recipe_name,
+            description: this.state.description,
+            cuisine_type: this.state.cuisine_type,
+            tags: this.state.tags,
+            difficulty: this.state.difficulty,
+            cooking_time: this.state.cooking_time,
+            preparation_time: this.state.preparation_time,
+            serving: this.state.serving,
+            created_by: this.state.created_by,
+            resource: {
+                _id: this.state.resource_id,
+                img_url: this.state.img_url
+            }
+        }
+        let response2 = await axios.put(baseURL + "/recipes", newRecipe)
+        console.log(response2.data)
+    }
+
 
     render() {
         if (this.state.isLoaded === false) {
@@ -260,14 +289,14 @@ export default class CreateRecipe extends React.Component {
                                         <div>
                                             <label>Ingredients:</label>
                                             <div>
-                                                <textarea name="ingredients" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each ingredients by a comma" value={this.state.ingredients} onChange={this.updateField}></textarea>
+                                                <textarea name="ingredients" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each ingredients by a exclaimation mark" value={this.state.ingredients} onChange={this.updateField}></textarea>
                                             </div>
                                             {/* <span className="warning-text">*Ingredients cannot be empty</span> */}
                                         </div>
                                         <div>
                                             <label>Instructions:</label>
                                             <div>
-                                                <textarea name="instructions" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each instructions by a comma" value={this.state.instructions} onChange={this.updateField}></textarea>
+                                                <textarea name="instructions" className="form-control create-textarea" rows="2" cols="30" placeholder="Seperate each instructions by a exclaimation mark" value={this.state.instructions} onChange={this.updateField}></textarea>
                                             </div>
                                             {/* <span className="warning-text">*Instructions cannot be empty</span> */}
                                         </div>

@@ -65,7 +65,7 @@ export default class ViewAll extends React.Component {
                 <div className="container">
                 <div className="hero-wrapper">
                     <div className="home-hero-img">
-                        <p className="hero-title">
+                        <div className="hero-title">
                             <h2>Recreate</h2>
                             <h2>Recipe</h2>
                             <p>Looking to recreate a dish?</p>
@@ -73,7 +73,7 @@ export default class ViewAll extends React.Component {
                             <p>With a single delivery you will have all you need. </p>
 
 
-                        </p>
+                        </div>
                         <div className="cover-overlay home-overlay"></div>
                     </div>
                 </div>
