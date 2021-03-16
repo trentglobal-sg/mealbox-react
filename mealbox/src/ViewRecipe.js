@@ -20,7 +20,6 @@ export default class ViewRecipe extends React.Component {
         let response2 = await axios.post(baseURL + "/comments/individual", {
             recipe_id: recipe_id
         })
-        console.log(response2.data)
         this.setState({
             isLoaded: true,
             individualRecipe: response.data,

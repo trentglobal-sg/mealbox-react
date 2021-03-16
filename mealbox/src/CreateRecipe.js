@@ -30,6 +30,10 @@ export default class CreateRecipe extends React.Component {
     async componentDidMount(){
         if(this.props.match != undefined){
             let recipe_id = this.props.match.params.l_id;
+            let response = await axios.post(baseURL + "/recipes/individual",{
+                recipe_id : recipe_id
+            })
+            // console.log(response.data)
             this.setState({
                 recipe_id: recipe_id
             })
