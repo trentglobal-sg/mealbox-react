@@ -8,6 +8,9 @@ export default class ViewRecipe extends React.Component {
         individualRecipe: '',
         tempRecipe: '',
         commentsList: [],
+        comment: "",
+        comment_name:"",
+        isEditing: false,
         isLoaded: false
     }
 
@@ -82,13 +85,13 @@ export default class ViewRecipe extends React.Component {
         } else {
             for (let l of this.state.commentsList) {
                 list.push(
-                    <div className="p-2">
+                    <div className="p-2" key={l.id}>
                         <h6>{l.username}</h6>
                         <p>{l.comments}</p>
                         <div style={{
                             display: this.props.loginStatus === true ? "block" : "none"
                         }}>
-                            <button className="btn action-buttons btn-success ml-2" value={l._id} >Edit</button>
+                            <button className="btn action-buttons btn-success ml-2" value={l._id} onClick={this.editComment}>Edit</button>
                             <button className="btn action-buttons btn-danger ml-2" value={l._id} >Delete</button>
                         </div>
                     </div>
@@ -96,6 +99,18 @@ export default class ViewRecipe extends React.Component {
             }
         }
         return list
+    }
+
+    editComment = (e) => {
+        for (let i in this.state.commentsList){
+            if (this.state.commentsList[i]._id === e.target.value){
+                this.setState({
+                    comment_name: this.state.commentsList[i].username,
+                    comment: this.state.commentsList[i].comments,
+                    isEditing: true
+                })
+            }
+        }
     }
 
     render() {
@@ -161,8 +176,12 @@ export default class ViewRecipe extends React.Component {
                             <div style={{
                                 textAlign: "center"
                             }}>
-
-                                <button className="comment-submit btn-success ml-auto" onClick={this.addComment}>Submit</button>
+                                <button style={{
+                                    display: this.state.isEditing === false ? "none" : "inline-block"
+                                }}className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
+                                <button style={{
+                                    display: this.state.isEditing === false ? "inline-block" : "none"
+                                }}className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
                             </div>
                             <hr></hr>
                             {this.renderComments()}
