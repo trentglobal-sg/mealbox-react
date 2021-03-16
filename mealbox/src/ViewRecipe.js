@@ -38,10 +38,10 @@ export default class ViewRecipe extends React.Component {
             comments: this.state.comment
         }
         await axios.post(baseURL + "/comments", newComment)
-
-        this.setState({
-            commentsList: [...this.state.commentsList, newComment]
-        })
+        window.location.reload()
+        // this.setState({
+        //     commentsList: [...this.state.commentsList, newComment]
+        // })
     }
 
     renderTags = () => {
@@ -93,7 +93,7 @@ export default class ViewRecipe extends React.Component {
                             display: this.props.loginStatus === true ? "block" : "none"
                         }}>
                             <button className="btn action-buttons btn-success ml-2" value={l._id} onClick={this.editComment}>Edit</button>
-                            <button className="btn action-buttons btn-danger ml-2" value={l._id} >Delete</button>
+                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteComment} >Delete</button>
                         </div>
                     </div>
                 )
@@ -136,6 +136,13 @@ export default class ViewRecipe extends React.Component {
 
             })
             // window.location.reload()
+        }
+    }
+
+    deleteComment = async (e) => {
+        let response = await axios.delete(baseURL+"/comments/" + e.target.value)
+        if (response.data.Message === "Deleted comment"){
+            window.location.reload()
         }
     }
 

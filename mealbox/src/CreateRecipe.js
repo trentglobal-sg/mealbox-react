@@ -114,10 +114,9 @@ export default class CreateRecipe extends React.Component {
             }
         }
 
-        // Posting the comment to db using API link
-        let recipeResponse = await axios.post(baseURL + "/recipes", newRecipe)
-        console.log(resourceResponse.data)
-        console.log(recipeResponse.data)
+        // Posting the recipe to db using API link
+        await axios.post(baseURL + "/recipes", newRecipe)
+        // let recipeResponse = await axios.post(baseURL + "/recipes", newRecipe)
     }
     
     edit = async () => {
@@ -152,6 +151,9 @@ export default class CreateRecipe extends React.Component {
         }
         let response2 = await axios.put(baseURL + "/recipes", newRecipe)
         console.log(response2.data)
+        if (response.data.Message === "Updated Resource" && response2.data.Message === "Updated Recipe"){
+            window.location = "/"
+        }
     }
 
 
