@@ -9,7 +9,8 @@ export default class ViewRecipe extends React.Component {
         tempRecipe: '',
         commentsList: [],
         comment: "",
-        comment_name:"",
+        comment_name: "",
+        comment_id: "",
         isEditing: false,
         isLoaded: false
     }
@@ -37,7 +38,7 @@ export default class ViewRecipe extends React.Component {
             comments: this.state.comment
         }
         await axios.post(baseURL + "/comments", newComment)
-        
+
         this.setState({
             commentsList: [...this.state.commentsList, newComment]
         })
@@ -79,7 +80,7 @@ export default class ViewRecipe extends React.Component {
         if (this.state.commentsList[0] == null) {
             list.push(
                 <div className="p-2" style={{
-                    textAlign:"center"
+                    textAlign: "center"
                 }}>Be the first to review this recipe!</div>
             )
         } else {
@@ -102,14 +103,39 @@ export default class ViewRecipe extends React.Component {
     }
 
     editComment = (e) => {
-        for (let i in this.state.commentsList){
-            if (this.state.commentsList[i]._id === e.target.value){
+        for (let i in this.state.commentsList) {
+            if (this.state.commentsList[i]._id === e.target.value) {
                 this.setState({
+                    comment_id: e.target.value,
                     comment_name: this.state.commentsList[i].username,
                     comment: this.state.commentsList[i].comments,
                     isEditing: true
                 })
             }
+        }
+    }
+
+    putComment = async () => {
+        let newComment = {
+            _id: this.state.comment_id,
+            username: this.state.comment_name,
+            comments: this.state.comment
+        }
+        let response = await axios.put(baseURL + "/comments", newComment)
+        console.log(response.data.message)
+        if (response.data.message === "Updated Comments") {
+            let recipe_id = this.props.match.params.l_id;
+            let response = await axios.post(baseURL + "/comments/individual", {
+                recipe_id: recipe_id
+            })
+            this.setState({
+                isEditing: false,
+                commentsList: response.data,
+                comment_name: "",
+                comment: ""
+
+            })
+            // window.location.reload()
         }
     }
 
@@ -178,10 +204,10 @@ export default class ViewRecipe extends React.Component {
                             }}>
                                 <button style={{
                                     display: this.state.isEditing === false ? "none" : "inline-block"
-                                }}className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
+                                }} className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
                                 <button style={{
                                     display: this.state.isEditing === false ? "inline-block" : "none"
-                                }}className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
+                                }} className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
                             </div>
                             <hr></hr>
                             {this.renderComments()}
