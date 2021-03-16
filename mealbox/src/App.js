@@ -2,7 +2,6 @@ import './App.css';
 import React from "react"
 // import AddComments from "./AddComments"
 import CreateRecipe from './CreateRecipe'
-import Header from "./Header"
 // import Footer from "./Footer"
 import ViewAll from "./ViewAll"
 import ViewRecipe from "./ViewRecipe"
@@ -48,7 +47,7 @@ class App extends React.Component {
                             <CreateRecipe />
                         </Route>
                         <Route exact path="/view/:l_id" render={props => {
-                            return <ViewRecipe {...props} />
+                            return <ViewRecipe {...props} loginStatus={this.state.pseudo_login}/>
                         }}>
                         </Route>
                         <Route exact path="/edit/:l_id" render={props => {

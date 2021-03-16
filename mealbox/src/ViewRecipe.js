@@ -85,6 +85,12 @@ export default class ViewRecipe extends React.Component {
                     <div className="p-2">
                         <h6>{l.username}</h6>
                         <p>{l.comments}</p>
+                        <div style={{
+                            display: this.props.loginStatus === true ? "block" : "none"
+                        }}>
+                            <button className="btn action-buttons btn-success ml-2" value={l._id} >Edit</button>
+                            <button className="btn action-buttons btn-danger ml-2" value={l._id} >Delete</button>
+                        </div>
                     </div>
                 )
             }
