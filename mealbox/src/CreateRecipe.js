@@ -35,6 +35,7 @@ export default class CreateRecipe extends React.Component {
             })
             // console.log(response.data)
             this.setState({
+                //Recipes Collection
                 recipe_id: recipe_id,
                 recipe_name: response.data.recipe_name,
                 description: response.data.description,
@@ -47,7 +48,10 @@ export default class CreateRecipe extends React.Component {
                 preparation_time: response.data.preparation_time,
                 serving: response.data.serving,
                 created_by: response.data.created_by,
-                img_url: response.data.resource.img_url
+                created_on: response.data.created_on,
+                //Resource Collection
+                resource_id: response.data.resource._id,
+                img_url: response.data.resource.img_url,
             })
         }
     }

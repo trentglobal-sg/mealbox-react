@@ -73,7 +73,7 @@ export default class ViewAll extends React.Component {
 
 
                         </p>
-                        <div className="cover-overlay"></div>
+                        <div className="cover-overlay home-overlay"></div>
                     </div>
                 </div>
                 {/* <div className="container"> */}
