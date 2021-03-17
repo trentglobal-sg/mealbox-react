@@ -60,6 +60,16 @@ export default class ViewAll extends React.Component {
             recipesList: response.data.reverse()
         })
     }
+    resetQuery = async() => {
+        let response = await axios.get(baseURL+ "/recipes")
+        this.setState({
+            recipesList: response.data.reverse(),
+            search_field: "",
+            cuisine_type: "",
+            difficulty: "",
+        })
+    }
+
     renderList = () => {
         let list = [];
         for (let l of this.state.recipesList) {
@@ -124,7 +134,7 @@ export default class ViewAll extends React.Component {
                         </select>
                         <div className="filter-buttons">
                             <button type="submit" className="search form-control my-1 mx-sm-2" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
-                            <button type="submit" className="search reset form-control my-1 mx-sm-2" onClick={this.searchQuery}><i className="fas fa-undo-alt"></i></button>
+                            <button type="submit" className="search reset form-control my-1 mx-sm-2" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
                         </div>
                     </div>
                     <div className="filter-des">
