@@ -97,6 +97,7 @@ export default class ViewAll extends React.Component {
                             <option>Moderate</option>
                             <option>Hard</option>
                         </select>
+                        <button type="submit" className="search form-control my-1 mx-sm-2"><i className="fa fa-search"></i></button>
                     </div>
                     {this.renderList()}
                 </div>

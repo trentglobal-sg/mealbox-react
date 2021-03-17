@@ -163,6 +163,11 @@ h4{
 .space{
     height:10px;
 }
+
+.search{
+    width:50px !important;
+}
+
 @media only screen and (max-width: 767px){
   .box{
       height:500px;
@@ -182,4 +187,8 @@ h4{
       display:block;
   }
   
+  .search{
+      width:100% !important;
+    }
+
 }
