@@ -1,6 +1,6 @@
 import React from "react"
 import axios from "axios"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
 
@@ -8,12 +8,21 @@ const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
 export default class ViewAll extends React.Component {
     state = {
         recipesList: [],
+        search_field: "",
+        cuisine_type: "",
+        difficulty: "",
     }
 
     async componentDidMount() {
         let response = await axios.get(baseURL + "/recipes");
         this.setState({
             recipesList: response.data.reverse()
+        })
+    }
+
+    updateField = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
         })
     }
 
@@ -29,10 +38,28 @@ export default class ViewAll extends React.Component {
         })
     }
 
-    alertBox = (e) => {
-        alert("You've clicked the title box")
-    }
+    // alertBox = (e) => {
+    //     alert("You've clicked something")
+    // }
 
+    searchQuery = async () => {
+        let newSearch = {};
+        if (this.state.search_field !== "") {
+            newSearch["recipe_name"] = this.state.search_field
+        }
+        if (this.state.cuisine_type !== "" && this.state.cuisine_type !== "- Cuisine Type -") {
+            newSearch["cuisine_type"] = this.state.cuisine_type
+        }
+        if (this.state.difficulty !== "" && this.state.difficulty !== "- Difficulty Level -") {
+            newSearch["difficulty"] = this.state.difficulty
+        }
+        console.log(newSearch)
+        let response = await axios.post(baseURL + "/recipes/search", newSearch)
+        console.log(response.data)
+        this.setState({
+            recipesList: response.data.reverse()
+        })
+    }
     renderList = () => {
         let list = [];
         for (let l of this.state.recipesList) {
@@ -43,13 +70,13 @@ export default class ViewAll extends React.Component {
                     }} className="image-container col-12 col-md-4">
                     </div>
                     <div className="des-container col-12 col-md-8 mt-2">
-                    <Link to={"/view/"+l._id}>{l.recipe_name}</Link>
+                        <Link to={"/view/" + l._id}>{l.recipe_name}</Link>
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
                         <div style={{
                             display: this.props.loginStatus === true ? "block" : "none"
-                        }}className="des-buttons mt-2">
-                            <Link to={"/edit/"+l._id} className="btn btn-success action-buttons">Edit</Link>
+                        }} className="des-buttons mt-2">
+                            <Link to={"/edit/" + l._id} className="btn btn-success action-buttons">Edit</Link>
                             <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
                         </div>
                     </div>
@@ -63,41 +90,45 @@ export default class ViewAll extends React.Component {
         return (
             <React.Fragment>
                 <div className="container">
-                <div className="hero-wrapper">
-                    <div className="home-hero-img">
-                        <div className="hero-title">
-                            <h2>Recreate</h2>
-                            <h2>Recipe</h2>
-                            <p>Looking to recreate a dish?</p>
-                            <p>Find it a hassle to buy ingredients?</p>
-                            <p>With a single delivery you will have all you need. </p>
+                    <div className="hero-wrapper">
+                        <div className="home-hero-img">
+                            <div className="hero-title">
+                                <h2>Recreate</h2>
+                                <h2>Recipe</h2>
+                                <p>Looking to recreate a dish?</p>
+                                <p>Find it a hassle to buy ingredients?</p>
+                                <p>With a single delivery you will have all you need. </p>
 
 
+                            </div>
+                            <div className="cover-overlay home-overlay"></div>
                         </div>
-                        <div className="cover-overlay home-overlay"></div>
                     </div>
-                </div>
-                {/* <div className="container"> */}
+                    {/* <div className="container"> */}
                     {/* <div className="row"></div> */}
 
                     <div className="filter-bar">
-                        <input type="text" className="form-control my-1 mx-sm-2" name="search-field" placeholder="Search Recipe Name" />
-                        <select className="form-control cuisine-bar my-1 mx-sm-2" name="cuisine_type" value={this.state.cuisine_type}>
-                            <option defaultValue>Cuisine Type</option>
-                            <option>Show All</option>
+                        <input type="text" className="form-control my-1 mx-sm-2" name="search_field" value={this.state.search_field} placeholder="Search Recipe Name" onChange={this.updateField} />
+                        <select className="form-control cuisine-bar my-1 mx-sm-2" name="cuisine_type" value={this.state.cuisine_type} onChange={this.updateField}>
+                            <option defaultValue>- Cuisine Type -</option>
                             <option>American</option>
                             <option>Chinese</option>
                             <option>Italian</option>
                             <option>Japanese</option>
                         </select>
-                        <select className="form-control difficulty-bar my-1 mx-sm-2" name="difficulty" value={this.state.cuisine_type} >
-                            <option defaultValue>Difficulty Level</option>
-                            <option>Show All</option>
+                        <select className="form-control difficulty-bar my-1 mx-sm-2" name="difficulty" value={this.state.difficulty} onChange={this.updateField} >
+                            <option defaultValue>- Difficulty Level -</option>
                             <option>Easy</option>
                             <option>Moderate</option>
                             <option>Hard</option>
                         </select>
-                        <button type="submit" className="search form-control my-1 mx-sm-2"><i className="fa fa-search"></i></button>
+                        <div className="filter-buttons">
+                            <button type="submit" className="search form-control my-1 mx-sm-2" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
+                            <button type="submit" className="search reset form-control my-1 mx-sm-2" onClick={this.searchQuery}><i className="fas fa-undo-alt"></i></button>
+                        </div>
+                    </div>
+                    <div className="filter-des">
+                        <p>Showing <strong> {this.state.recipesList.length} </strong> recipes</p>
                     </div>
                     {this.renderList()}
                 </div>

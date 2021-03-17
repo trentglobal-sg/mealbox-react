@@ -139,6 +139,13 @@ export default class ViewRecipe extends React.Component {
             })
         }
     }
+    cancel = () => {
+        this.setState({
+            isEditing: false,
+            comment_name:"",
+            comment:""
+        })
+    }
 
     deleteComment = async (e) => {
         let response = await axios.delete(baseURL+"/comments/" + e.target.value)
@@ -219,6 +226,9 @@ export default class ViewRecipe extends React.Component {
                                 <button style={{
                                     display: this.state.isEditing === false ? "none" : "inline-block"
                                 }} className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
+                                <button style={{
+                                    display: this.state.isEditing === false ? "none" : "inline-block"
+                                }} className="comment-submit btn-secondary ml-1" onClick={this.cancel} >Cancel</button>
                                 <button style={{
                                     display: this.state.isEditing === false ? "inline-block" : "none"
                                 }} className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>

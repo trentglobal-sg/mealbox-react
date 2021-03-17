@@ -154,10 +154,13 @@ export default class CreateRecipe extends React.Component {
         let response2 = await axios.put(baseURL + "/recipes", newRecipe)
         console.log(response2.data)
         if (response.data.Message === "Updated Resource" && response2.data.Message === "Updated Recipe"){
-            window.location = "/"
+           this.props.history.push("/")
         }
     }
 
+    cancel = () => {
+        this.props.history.push("/")
+    }
 
     render() {
         if (this.state.isLoaded === false) {
@@ -316,7 +319,7 @@ export default class CreateRecipe extends React.Component {
                                                 display: this.state.recipe_id != null ? "inline-block" : "none"
                                             }}
                                                 className="btn action-buttons btn-warning" onClick={this.edit}>Submit</button>
-                                            <button className="btn action-buttons btn-secondary ml-2" >Cancel</button>
+                                            <button className="btn action-buttons btn-secondary ml-2" onClick={this.cancel} >Cancel</button>
                                         </div>
 
                                     </section>
