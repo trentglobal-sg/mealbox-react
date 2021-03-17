@@ -26,7 +26,7 @@ export default class CreateRecipe extends React.Component {
     // Setting up flags to do editing using CreateRecipe.js
     // When there is a params, set a new state call recipe_id
     async componentDidMount() {
-        if (this.props.match !== undefined) {
+        if (this.props.match.path !== "/new") {
             let recipe_id = this.props.match.params.l_id;
             let response = await axios.post(baseURL + "/recipes/individual", {
                 recipe_id: recipe_id
@@ -53,7 +53,7 @@ export default class CreateRecipe extends React.Component {
                 img_url: response.data.resource.img_url,
             })
         }
-        if (this.props.match === undefined) {
+        else {
             this.setState({
                 isLoaded: true
             })
@@ -117,6 +117,8 @@ export default class CreateRecipe extends React.Component {
         // Posting the recipe to db using API link
         await axios.post(baseURL + "/recipes", newRecipe)
         // let recipeResponse = await axios.post(baseURL + "/recipes", newRecipe)
+        this.props.history.push("/")
+        // window.location.reload("/")
     }
     
     edit = async () => {

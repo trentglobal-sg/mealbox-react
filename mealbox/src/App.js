@@ -43,8 +43,9 @@ class App extends React.Component {
                         }}>
 
                         </Route>
-                        <Route exact path="/new">
-                            <CreateRecipe />
+                        <Route exact path="/new" render={props => {
+                            return <CreateRecipe {...props}/>
+                        }}>
                         </Route>
                         <Route exact path="/view/:l_id" render={props => {
                             return <ViewRecipe {...props} loginStatus={this.state.pseudo_login}/>

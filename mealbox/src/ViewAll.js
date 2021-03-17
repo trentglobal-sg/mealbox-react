@@ -13,7 +13,7 @@ export default class ViewAll extends React.Component {
     async componentDidMount() {
         let response = await axios.get(baseURL + "/recipes");
         this.setState({
-            recipesList: response.data
+            recipesList: response.data.reverse()
         })
     }
 

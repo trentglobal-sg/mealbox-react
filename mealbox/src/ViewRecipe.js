@@ -27,7 +27,7 @@ export default class ViewRecipe extends React.Component {
         this.setState({
             isLoaded: true,
             individualRecipe: response.data,
-            commentsList: response2.data
+            commentsList: response2.data.reverse()
         })
     }
 
@@ -37,11 +37,13 @@ export default class ViewRecipe extends React.Component {
             username: this.state.comment_name,
             comments: this.state.comment
         }
-        await axios.post(baseURL + "/comments", newComment)
-        window.location.reload()
-        // this.setState({
-        //     commentsList: [...this.state.commentsList, newComment]
-        // })
+        let response = await axios.post(baseURL + "/comments", newComment)
+        // console.log(response.data)
+        if (response.data.Message === "Comments Inserted"){
+            this.setState({
+                commentsList: [newComment, ...this.state.commentsList]
+            })
+        }
     }
 
     renderTags = () => {
@@ -122,7 +124,7 @@ export default class ViewRecipe extends React.Component {
             comments: this.state.comment
         }
         let response = await axios.put(baseURL + "/comments", newComment)
-        console.log(response.data.message)
+        // console.log(response.data.message)
         if (response.data.message === "Updated Comments") {
             let recipe_id = this.props.match.params.l_id;
             let response = await axios.post(baseURL + "/comments/individual", {
@@ -135,14 +137,19 @@ export default class ViewRecipe extends React.Component {
                 comment: ""
 
             })
-            // window.location.reload()
         }
     }
 
     deleteComment = async (e) => {
         let response = await axios.delete(baseURL+"/comments/" + e.target.value)
         if (response.data.Message === "Deleted comment"){
-            window.location.reload()
+            let recipe_id = this.props.match.params.l_id;
+            let response = await axios.post(baseURL + "/comments/individual", {
+                recipe_id: recipe_id
+            })
+            this.setState({
+                commentsList: response.data
+            })
         }
     }
 
