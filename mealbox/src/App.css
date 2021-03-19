@@ -115,6 +115,19 @@
 .des-container{
     height:100%;
 }
+
+.des-title{
+    color:black;
+    font-size:1.3rem;
+    text-decoration: underline;
+    font-weight:600;
+}
+
+.des-title:hover{
+    text-decoration: none;
+    color: grey;
+}
+
 .des-created{
     position: absolute;
     bottom: 0%;
@@ -221,6 +234,9 @@ h4{
     border-radius: 10px;
 
 }
+.delete-btn:hover{
+    color:grey;
+}
 
 .edit-btn{
     height:30px;
@@ -228,8 +244,11 @@ h4{
     border-radius: 10px;
     color:white;
     background-color:rgb(90, 207, 90);
-    text-decoration:none;
     padding-top: 6px;
+}
+.edit-btn:hover{
+    text-decoration:none;
+    color:grey;
 }
 
 .search-comment{
@@ -240,7 +259,7 @@ h4{
 }
 @media only screen and (max-width: 767px){
   .box{
-      height:500px;
+      height:550px;
       display:block;
   }
   .image-container{

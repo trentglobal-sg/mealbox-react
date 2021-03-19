@@ -80,7 +80,7 @@ export default class ViewAll extends React.Component {
                     }} className="image-container col-12 col-md-4">
                     </div>
                     <div className="des-container col-12 col-md-8 mt-2">
-                        <Link to={"/view/" + l._id}>{l.recipe_name}</Link>
+                        <Link to={"/view/" + l._id} className="des-title">{l.recipe_name}</Link>
                         <p>{l.description}</p>
                         
                 <div className="tags-wrapper"> {this.renderTags(l.tags)}</div>
