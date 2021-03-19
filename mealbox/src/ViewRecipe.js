@@ -11,6 +11,7 @@ export default class ViewRecipe extends React.Component {
         comment: "",
         comment_name: "",
         comment_id: "",
+        search_comment: "",
         isEditing: false,
         isLoaded: false
     }
@@ -39,11 +40,36 @@ export default class ViewRecipe extends React.Component {
         }
         let response = await axios.post(baseURL + "/comments", newComment)
         // console.log(response.data)
-        if (response.data.Message === "Comments Inserted"){
+        if (response.data.Message === "Comments Inserted") {
             this.setState({
                 commentsList: [newComment, ...this.state.commentsList]
             })
         }
+    }
+
+    resetQuery = async() => {
+        let recipe_id = this.props.match.params.l_id;
+        let response = await axios.post(baseURL + "/comments/individual", {
+            recipe_id: recipe_id
+        })
+        this.setState({
+            commentsList: response.data.reverse(),
+            search_comment: "",
+        })
+    }
+
+    searchQuery = async () => {
+        let newSearch = {};
+        let recipe_id = this.props.match.params.l_id;
+        if (this.state.search_comment !== "") {
+            newSearch["search_query"] = this.state.search_comment
+        }
+        // console.log(newSearch)
+        let response = await axios.post(baseURL + "/comments/"+recipe_id+"/search", newSearch)
+        // console.log(response.data)
+        this.setState({
+            commentsList: response.data.reverse()
+        })
     }
 
     renderTags = () => {
@@ -142,14 +168,14 @@ export default class ViewRecipe extends React.Component {
     cancel = () => {
         this.setState({
             isEditing: false,
-            comment_name:"",
-            comment:""
+            comment_name: "",
+            comment: ""
         })
     }
 
     deleteComment = async (e) => {
-        let response = await axios.delete(baseURL+"/comments/" + e.target.value)
-        if (response.data.Message === "Deleted comment"){
+        let response = await axios.delete(baseURL + "/comments/" + e.target.value)
+        if (response.data.Message === "Deleted comment") {
             let recipe_id = this.props.match.params.l_id;
             let response = await axios.post(baseURL + "/comments/individual", {
                 recipe_id: recipe_id
@@ -234,6 +260,15 @@ export default class ViewRecipe extends React.Component {
                                 }} className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
                             </div>
                             <hr></hr>
+                            <div style={{
+                                display: this.props.loginStatus === true ? "flex" : "none"
+                            }} className="comment-filter p-2">
+                                <input type="text" className="form-control" placeholder="Search Comments" value={this.state.search_comment} name="search_comment" onChange={this.updateField}></input>
+                                <div className="filter-buttons">
+                                    <button type="submit" className="search form-control ml-1" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
+                                    <button type="submit" className="search reset form-control ml-1" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
+                                </div>
+                            </div>
                             {this.renderComments()}
                             <hr></hr>
                             <div className="space"></div>

@@ -83,13 +83,16 @@ export default class ViewAll extends React.Component {
                         <Link to={"/view/" + l._id}>{l.recipe_name}</Link>
                         <p>{l.description}</p>
                         <p>By: <strong>{l.created_by}</strong></p>
-                        <div style={{
-                            display: this.props.loginStatus === true ? "block" : "none"
-                        }} className="des-buttons mt-2">
-                            <Link to={"/edit/" + l._id} className="btn btn-success action-buttons">Edit</Link>
-                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button>
-                        </div>
+                        
                     </div>
+                    <div style={{
+                            display: this.props.loginStatus === true ? "block" : "none"
+                        }} className="des-buttons">
+                            <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
+                           <button className="fas fa-trash-alt delete-btn ml-2"></button> 
+                            {/* <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
+                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button> */}
+                        </div>
                 </div>
             )
         }
@@ -138,7 +141,7 @@ export default class ViewAll extends React.Component {
                         </div>
                     </div>
                     <div className="filter-des">
-                        <p>Showing <strong> {this.state.recipesList.length} </strong> recipes</p>
+                        <p>Showing <strong> {this.state.recipesList.length} </strong> recipes.</p>
                     </div>
                     {this.renderList()}
                     <div className="space"></div>
