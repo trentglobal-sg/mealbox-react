@@ -47,7 +47,7 @@ export default class ViewRecipe extends React.Component {
         }
     }
 
-    resetQuery = async() => {
+    resetQuery = async () => {
         let recipe_id = this.props.match.params.l_id;
         let response = await axios.post(baseURL + "/comments/individual", {
             recipe_id: recipe_id
@@ -65,7 +65,7 @@ export default class ViewRecipe extends React.Component {
             newSearch["search_query"] = this.state.search_comment
         }
         // console.log(newSearch)
-        let response = await axios.post(baseURL + "/comments/"+recipe_id+"/search", newSearch)
+        let response = await axios.post(baseURL + "/comments/" + recipe_id + "/search", newSearch)
         // console.log(response.data)
         this.setState({
             commentsList: response.data.reverse()
@@ -81,23 +81,23 @@ export default class ViewRecipe extends React.Component {
         }
         return list
     }
-     checkColor = (text) => {
-        if (text === "5-Minutes Or Less"){
+    checkColor = (text) => {
+        if (text === "5-Minutes Or Less") {
             return "#AAD4BE";
         }
-        if (text === "Date Night Special"){
+        if (text === "Date Night Special") {
             return "#F2CBAA";
         }
-        if (text === "Kids Favourite"){
+        if (text === "Kids Favourite") {
             return "#EEB6B7";
         }
-        if (text === "Made From Scratch"){
+        if (text === "Made From Scratch") {
             return "#ECB8CF";
         }
-        if (text === "Slow Cook Required"){
+        if (text === "Slow Cook Required") {
             return "#AFA7CE ";
         }
-        if (text === "Suitable For All"){
+        if (text === "Suitable For All") {
             return "#A6D6EA";
         }
     }
@@ -217,84 +217,86 @@ export default class ViewRecipe extends React.Component {
             return (
                 <React.Fragment>
                     <div className="container">
-                        <h1>{this.state.individualRecipe.recipe_name}</h1>
-                        <div className="tags-wrapper">{this.renderTags()}</div>
-                        <p>{this.state.individualRecipe.description}</p>
-                        <p>By: <strong>{this.state.individualRecipe.created_by}</strong></p>
-                        <div className="row p-2">
-                            <div style={{
-                                backgroundImage: `url(${this.state.individualRecipe.resource.img_url})`
-                            }} className="individual-box col-12 col-md-8">
+                        <div className="content-wrapper mt-2 p-3">
+                            <h1>{this.state.individualRecipe.recipe_name}</h1>
+                            <div className="tags-wrapper">{this.renderTags()}</div>
+                            <p>{this.state.individualRecipe.description}</p>
+                            <p>By: <strong>{this.state.individualRecipe.created_by}</strong></p>
+                            <div className="row p-2">
+                                <div style={{
+                                    backgroundImage: `url(${this.state.individualRecipe.resource.img_url})`
+                                }} className="individual-box col-12 col-md-8">
 
-                            </div>
-                            <div className="col-12 col-md-4 mt-2 mt-md-0">
-                                <div className="detail-box">
-                                    <p><strong>Cook: </strong> {this.state.individualRecipe.cooking_time}</p>
-                                    <p><strong>Prep: </strong> {this.state.individualRecipe.preparation_time}</p>
-                                    <p><strong>Serving: </strong> {this.state.individualRecipe.serving}</p>
-                                    <p><strong>Difficulty: </strong> {this.state.individualRecipe.difficulty}</p>
-                                    <p><strong>Cuisine Type: </strong> {this.state.individualRecipe.cuisine_type}</p>
+                                </div>
+                                <div className="col-12 col-md-4 mt-2 mt-md-0">
+                                    <div className="detail-box">
+                                        <p><strong>Cook: </strong> {this.state.individualRecipe.cooking_time}</p>
+                                        <p><strong>Prep: </strong> {this.state.individualRecipe.preparation_time}</p>
+                                        <p><strong>Serving: </strong> {this.state.individualRecipe.serving}</p>
+                                        <p><strong>Difficulty: </strong> {this.state.individualRecipe.difficulty}</p>
+                                        <p><strong>Cuisine Type: </strong> {this.state.individualRecipe.cuisine_type}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <hr></hr>
-                            <h3>Ingredients</h3>
-                            <div className="col-12 col-md-10">
-                                {this.renderIngredient()}
-                            </div>
-                        </div>
-                        <hr></hr>
-                        <div>
-                            <h3>Directions</h3>
-                            <div className="col-12 col-md-10">
-                                {this.renderDirections()}
-                            </div>
-                        </div>
-                        <hr></hr>
-                        <div>
-                            <h3>Reviews</h3>
-                        </div>
-                        <div className="comment-wrapper">
-                            <div className="form-group p-2 mb-0">
-                                <label>
-                                    Your Name:
-                                        </label>
-                                <input type="text" name="comment_name" className="form-control" value={this.state.comment_name} onChange={this.updateField} placeholder="Eg. John Dee" />
-                            </div>
-                            <div className="form-group p-2 mb-0">
-                                <label>
-                                    Review:
-                                        </label>
-                                <textarea name="comment" className="form-control create-textarea" rows="2" cols="30" value={this.state.comment} onChange={this.updateField} placeholder="Describe your experience!"></textarea>
-                            </div>
-                            <div style={{
-                                textAlign: "center"
-                            }}>
-                                <button style={{
-                                    display: this.state.isEditing === false ? "none" : "inline-block"
-                                }} className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
-                                <button style={{
-                                    display: this.state.isEditing === false ? "none" : "inline-block"
-                                }} className="comment-submit btn-secondary ml-1" onClick={this.cancel} >Cancel</button>
-                                <button style={{
-                                    display: this.state.isEditing === false ? "inline-block" : "none"
-                                }} className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
-                            </div>
-                            <hr></hr>
-                            <div style={{
-                                display: this.props.loginStatus === true ? "flex" : "none"
-                            }} className="comment-filter p-2">
-                                <input type="text" className="form-control" placeholder="Search Comments" value={this.state.search_comment} name="search_comment" onChange={this.updateField}></input>
-                                <div className="filter-buttons">
-                                    <button type="submit" className="search form-control ml-1" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
-                                    <button type="submit" className="search reset form-control ml-1" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
+                            <div>
+                                <hr></hr>
+                                <h3>Ingredients</h3>
+                                <div className="col-12 col-md-10">
+                                    {this.renderIngredient()}
                                 </div>
                             </div>
-                            {this.renderComments()}
                             <hr></hr>
-                            <div className="space"></div>
+                            <div>
+                                <h3>Directions</h3>
+                                <div className="col-12 col-md-10">
+                                    {this.renderDirections()}
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <div>
+                                <h3>Reviews</h3>
+                            </div>
+                            <div className="comment-wrapper">
+                                <div className="form-group p-2 mb-0">
+                                    <label>
+                                        Your Name:
+                                        </label>
+                                    <input type="text" name="comment_name" className="form-control" value={this.state.comment_name} onChange={this.updateField} placeholder="Eg. John Dee" />
+                                </div>
+                                <div className="form-group p-2 mb-0">
+                                    <label>
+                                        Review:
+                                        </label>
+                                    <textarea name="comment" className="form-control create-textarea" rows="2" cols="30" value={this.state.comment} onChange={this.updateField} placeholder="Describe your experience!"></textarea>
+                                </div>
+                                <div style={{
+                                    textAlign: "center"
+                                }}>
+                                    <button style={{
+                                        display: this.state.isEditing === false ? "none" : "inline-block"
+                                    }} className="comment-submit btn-success ml-auto" onClick={this.putComment} >Submit</button>
+                                    <button style={{
+                                        display: this.state.isEditing === false ? "none" : "inline-block"
+                                    }} className="comment-submit btn-secondary ml-1" onClick={this.cancel} >Cancel</button>
+                                    <button style={{
+                                        display: this.state.isEditing === false ? "inline-block" : "none"
+                                    }} className="comment-submit btn-warning ml-auto" onClick={this.addComment}>Create</button>
+                                </div>
+                                <hr></hr>
+                                <div style={{
+                                    display: this.props.loginStatus === true ? "flex" : "none"
+                                }} className="comment-filter p-2">
+                                    <input type="text" className="form-control" placeholder="Search Comments" value={this.state.search_comment} name="search_comment" onChange={this.updateField}></input>
+                                    <div className="filter-buttons">
+                                        <button type="submit" className="search form-control ml-1" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
+                                        <button type="submit" className="search reset form-control ml-1" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
+                                    </div>
+                                </div>
+                                {this.renderComments()}
+                                <hr></hr>
+                            </div>
                         </div>
+                                <div className="space"></div>
                     </div>
                 </React.Fragment>
             )
