@@ -82,16 +82,14 @@ export default class ViewAll extends React.Component {
                     <div className="des-container col-12 col-md-8 mt-2">
                         <Link to={"/view/" + l._id}>{l.recipe_name}</Link>
                         <p>{l.description}</p>
-                        <p>By: <strong>{l.created_by}</strong></p>
+                        <p className="des-created">By: <strong>{l.created_by}</strong></p>
                         
                     </div>
                     <div style={{
-                            display: this.props.loginStatus === true ? "block" : "none"
+                            display: this.props.loginStatus === true ? "flex" : "none"
                         }} className="des-buttons">
                             <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
-                           <button className="fas fa-trash-alt delete-btn ml-2"></button> 
-                            {/* <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
-                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteRecipe} >Delete</button> */}
+                           <button className="fas fa-trash-alt delete-btn ml-2" value={l._id} onClick={this.deleteRecipe}></button> 
                         </div>
                 </div>
             )
