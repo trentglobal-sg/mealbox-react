@@ -119,7 +119,12 @@ export default class ViewRecipe extends React.Component {
         let list = [];
         list.push(this.state.individualRecipe.instructions.map((instruction, index) => (
             <React.Fragment>
-                <h5 key={index}>Step {index + 1} </h5> <p>{instruction}</p>
+                <div style={{
+                    display: "flex"
+                }}>
+                    <i class="fas fa-check-circle mt-1"></i><h5 className="ml-2" key={index}>Step {index + 1} </h5> 
+                </div>
+                <p>{instruction}</p>
             </React.Fragment>
         )))
         return list
@@ -136,15 +141,21 @@ export default class ViewRecipe extends React.Component {
         } else {
             for (let l of this.state.commentsList) {
                 list.push(
-                    <div className="p-2" key={l.id}>
-                        <h6>{l.username}</h6>
+                    <div className="p-1" style={{
+                        position:"relative"
+                    }} key={l.id}>
+                        <h6><strong>{l.username}</strong></h6>
                         <p>{l.comments}</p>
                         <div style={{
-                            display: this.props.loginStatus === true ? "block" : "none"
-                        }}>
-                            <button className="btn action-buttons btn-success ml-2" value={l._id} onClick={this.editComment}>Edit</button>
-                            <button className="btn action-buttons btn-danger ml-2" value={l._id} onClick={this.deleteComment} >Delete</button>
+                            display: this.props.loginStatus === true ? "flex" : "none"
+                        }} className="view-btn">
+                            {/* <button className="btn action-buttons btn-success ml-2" value={l._id} onClick={this.editComment}>Edit</button> */}
+                           <button className="fas fa-edit delete-btn" style={{
+                               backgroundColor:"rgb(90, 207, 90)"
+                           }} value={l._id} onClick={this.editComment}></button> 
+                           <button className="fas fa-trash-alt delete-btn ml-2" value={l._id} onClick={this.deleteComment}></button> 
                         </div>
+                        <hr></hr>
                     </div>
                 )
             }
@@ -218,7 +229,7 @@ export default class ViewRecipe extends React.Component {
                 <React.Fragment>
                     <div className="container">
                         <div className="content-wrapper mt-2 p-3">
-                            <h1>{this.state.individualRecipe.recipe_name}</h1>
+                            <h1><strong>{this.state.individualRecipe.recipe_name}</strong></h1>
                             <div className="tags-wrapper">{this.renderTags()}</div>
                             <p>{this.state.individualRecipe.description}</p>
                             <p>By: <strong>{this.state.individualRecipe.created_by}</strong></p>
@@ -230,6 +241,7 @@ export default class ViewRecipe extends React.Component {
                                 </div>
                                 <div className="col-12 col-md-4 mt-2 mt-md-0">
                                     <div className="detail-box">
+                                        <i class="fas fa-clock detail-clock"></i>
                                         <p><strong>Cook: </strong> {this.state.individualRecipe.cooking_time}</p>
                                         <p><strong>Prep: </strong> {this.state.individualRecipe.preparation_time}</p>
                                         <p><strong>Serving: </strong> {this.state.individualRecipe.serving}</p>
@@ -240,21 +252,21 @@ export default class ViewRecipe extends React.Component {
                             </div>
                             <div>
                                 <hr></hr>
-                                <h3>Ingredients</h3>
+                                <h3><strong>Ingredients</strong></h3>
                                 <div className="col-12 col-md-10">
                                     {this.renderIngredient()}
                                 </div>
                             </div>
                             <hr></hr>
                             <div>
-                                <h3>Directions</h3>
+                                <h3><strong>Directions</strong></h3>
                                 <div className="col-12 col-md-10">
                                     {this.renderDirections()}
                                 </div>
                             </div>
                             <hr></hr>
                             <div>
-                                <h3>Reviews</h3>
+                                <h3><strong>Reviews</strong></h3>
                             </div>
                             <div className="comment-wrapper">
                                 <div className="form-group p-2 mb-0">
@@ -289,7 +301,7 @@ export default class ViewRecipe extends React.Component {
                                     <input type="text" className="form-control" placeholder="Search Comments" value={this.state.search_comment} name="search_comment" onChange={this.updateField}></input>
                                     <div className="filter-buttons">
                                         <button type="submit" className="search form-control ml-1" onClick={this.searchQuery}><i className="fa fa-search"></i></button>
-                                        <button type="submit" className="search reset form-control ml-1" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
+                                        <button type="submit" className="search reset2 form-control ml-1" onClick={this.resetQuery}><i className="fas fa-undo-alt"></i></button>
                                     </div>
                                 </div>
                                 {this.renderComments()}

@@ -156,10 +156,20 @@
     padding: 10px;
     font-size: 0.9rem;
 }
-
-h4{
-    cursor:pointer;
+.detail-clock{
+    color:rgb(250, 193, 87);
+    position: absolute;
+    right:3%;
+    top: -2%;
+    font-size:1.5rem;
+    background-color:white;
+    height:30px;
+    width: 30px;
+    text-align: center;
+    padding-top:1px;
+    border-radius: 5px;
 }
+
 
 .tags-wrapper{
     display:flex;
@@ -238,6 +248,12 @@ h4{
     color:grey;
 }
 
+.view-btn{
+    position: absolute;
+    right: 1%;
+    top: 0%;
+}
+
 .edit-btn{
     height:30px;
     width:26px;
@@ -285,6 +301,13 @@ h4{
     .reset{
         max-width: 25% !important;
         margin-left:10px;
+    }
+    .reset2{
+        max-width: 100% !important;
+        margin-left:10px;
+    }
+    .view-btn{
+        right:2%;
     }
 }
 
