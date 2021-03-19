@@ -17,25 +17,21 @@ class App extends React.Component {
         return (
             <Router>
                 <ScrollToTop>
-                    <nav className="navbar">
-                        <img src={require("./logo.png").default} width="50" height="50" className="d-inline-block" alt="" /> 
+                    <nav className="navbar container">
+                        <img src={require("./logo.png").default} width="50" height="50" className="logo-img" alt="" /> 
                         <p className="my-auto ml-2" style={{
                             fontWeight: "bold"
                         }}>MealBox</p>
+                        <div className="header-url my-auto">
+                                <Link to="/" className="ml-4 link">Home</Link>
+                                <Link to="/new" className="ml-4 link">Create</Link>
+                        </div>
                         <button style={{
                             display: this.state.pseudo_login === true ? "none" : "block"
-                        }} onClick={this.changeLogin}>Sign in</button>
+                        }} onClick={this.changeLogin} className="ml-auto acc-btn">Sign In</button>
                         <button style={{
                             display: this.state.pseudo_login === false ? "none" : "block"
-                        }} onClick={this.changeLogin}>Log out</button> 
-                        <ul>
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/new">Create Recipe</Link>
-                            </li>
-                        </ul>
+                        }} onClick={this.changeLogin} className="ml-auto acc-btn">Log Out</button> 
                     </nav>
                     <Switch>
                         <Route exact path="/" render={props => {
