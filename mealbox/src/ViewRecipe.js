@@ -75,9 +75,31 @@ export default class ViewRecipe extends React.Component {
     renderTags = () => {
         let list = [];
         for (let l of this.state.individualRecipe.tags) {
-            list.push(<p className="tags-view" key={l}>{l}</p>)
+            list.push(<p className="tags-view" style={{
+                backgroundColor: this.checkColor(l)
+            }} key={l}>{l}</p>)
         }
         return list
+    }
+     checkColor = (text) => {
+        if (text === "5-Minutes Or Less"){
+            return "#AAD4BE";
+        }
+        if (text === "Date Night Special"){
+            return "#F2CBAA";
+        }
+        if (text === "Kids Favourite"){
+            return "#EEB6B7";
+        }
+        if (text === "Made From Scratch"){
+            return "#ECB8CF";
+        }
+        if (text === "Slow Cook Required"){
+            return "#AFA7CE ";
+        }
+        if (text === "Suitable For All"){
+            return "#A6D6EA";
+        }
     }
     renderIngredient = () => {
         let list = [];
