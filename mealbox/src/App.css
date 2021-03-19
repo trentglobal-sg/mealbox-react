@@ -111,7 +111,8 @@
     height:100%;
 }
 .des-created{
-
+    position: absolute;
+    bottom: 0%;
 }
 
 .test-img{
@@ -153,6 +154,16 @@ h4{
     border-radius:10px;
     font-size:12px;
 }
+
+.tags-home{
+    color:black;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius:10px;
+    font-size:12px;
+    background-color:rgb(237, 168, 168)
+}
+
 .individual-box{
     height:500px;
     border-radius: 20px;

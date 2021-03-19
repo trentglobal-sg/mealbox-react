@@ -82,8 +82,9 @@ export default class ViewAll extends React.Component {
                     <div className="des-container col-12 col-md-8 mt-2">
                         <Link to={"/view/" + l._id}>{l.recipe_name}</Link>
                         <p>{l.description}</p>
-                        <p className="des-created">By: <strong>{l.created_by}</strong></p>
                         
+                <div className="tags-wrapper"> {this.renderTags(l.tags)}</div>
+                        <p className="des-created">By: <strong>{l.created_by}</strong></p>
                     </div>
                     <div style={{
                             display: this.props.loginStatus === true ? "flex" : "none"
@@ -95,6 +96,37 @@ export default class ViewAll extends React.Component {
             )
         }
         return list
+    }
+
+    renderTags = (tags) => {
+        let list = [];
+        for (let l of tags) {
+            list.push(<p className="tags-home" style={{
+                backgroundColor: this.checkColor(l)
+            }} key={l}>{l}</p>)
+        }
+        return list
+    }
+
+    checkColor = (text) => {
+        if (text === "5-Minutes Or Less"){
+            return "#AAD4BE";
+        }
+        if (text === "Date Night Special"){
+            return "#F2CBAA";
+        }
+        if (text === "Kids Favourite"){
+            return "#EEB6B7";
+        }
+        if (text === "Made From Scratch"){
+            return "#ECB8CF";
+        }
+        if (text === "Slow Cook Required"){
+            return "#AFA7CE ";
+        }
+        if (text === "Suitable For All"){
+            return "#A6D6EA";
+        }
     }
 
     render() {
