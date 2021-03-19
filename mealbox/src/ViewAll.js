@@ -118,7 +118,7 @@ export default class ViewAll extends React.Component {
                     {/* <div className="row"></div> */}
 
                     <div className="filter-bar">
-                        <input type="text" className="form-control my-1 mx-sm-2" name="search_field" value={this.state.search_field} placeholder="Search Recipe Name" onChange={this.updateField} />
+                        <input type="text" className="form-control my-1 mx-sm-2" name="search_field" value={this.state.search_field} placeholder="Search Recipe" onChange={this.updateField} />
                         <select className="form-control cuisine-bar my-1 mx-sm-2" name="cuisine_type" value={this.state.cuisine_type} onChange={this.updateField}>
                             <option defaultValue>- Cuisine Type -</option>
                             <option>American</option>
@@ -127,7 +127,7 @@ export default class ViewAll extends React.Component {
                             <option>Japanese</option>
                         </select>
                         <select className="form-control difficulty-bar my-1 mx-sm-2" name="difficulty" value={this.state.difficulty} onChange={this.updateField} >
-                            <option defaultValue>- Difficulty Level -</option>
+                            <option defaultValue>- Difficulty -</option>
                             <option>Easy</option>
                             <option>Moderate</option>
                             <option>Hard</option>
@@ -141,6 +141,7 @@ export default class ViewAll extends React.Component {
                         <p>Showing <strong> {this.state.recipesList.length} </strong> recipes</p>
                     </div>
                     {this.renderList()}
+                    <div className="space"></div>
                 </div>
             </React.Fragment>
         )

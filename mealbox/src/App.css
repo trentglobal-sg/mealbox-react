@@ -1,9 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Roboto+Slab&display=swap');
+
 #root{
     background-image: url("white_wall_hash.png");
-    /* background-color:red; */
+    font-family: 'Roboto Slab', serif;
 }
 .navbar{
     justify-content: flex-start !important;
+}
+
+.logo-title{
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 2rem;
 }
 
 .hero-img{
@@ -176,8 +184,8 @@ h4{
     display:flex;
 }
 .link{
-    color:black !important;
-    font-weight:600;
+    color:grey !important;
+    font-weight:500;
 }
 
 .acc-btn{
@@ -186,6 +194,9 @@ h4{
     background: rgb(198, 198, 198)
 }
 
+.space{
+    height:30px;
+}
 @media only screen and (max-width: 767px){
   .box{
       height:500px;
@@ -215,8 +226,8 @@ h4{
     }
 }
 
-@media only screen and (max-width: 450px){
+/* @media only screen and (max-width: 450px){
   .logo-img{
       display:none !important;
   }
-}
+} */

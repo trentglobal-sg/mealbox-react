@@ -18,10 +18,8 @@ class App extends React.Component {
             <Router>
                 <ScrollToTop>
                     <nav className="navbar container">
-                        <img src={require("./logo.png").default} width="50" height="50" className="logo-img" alt="" /> 
-                        <p className="my-auto ml-2" style={{
-                            fontWeight: "bold"
-                        }}>MealBox</p>
+                        {/* <img src={require("./logo.png").default} width="50" height="50" className="logo-img" alt="" />  */}
+                        <p className="my-auto ml-2 logo-title" >MealBox</p>
                         <div className="header-url my-auto">
                                 <Link to="/" className="ml-4 link">Home</Link>
                                 <Link to="/new" className="ml-4 link">Create</Link>
