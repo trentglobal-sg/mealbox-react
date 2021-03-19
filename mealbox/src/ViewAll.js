@@ -38,9 +38,6 @@ export default class ViewAll extends React.Component {
         })
     }
 
-    // alertBox = (e) => {
-    //     alert("You've clicked something")
-    // }
 
     searchQuery = async () => {
         let newSearch = {};
@@ -53,15 +50,15 @@ export default class ViewAll extends React.Component {
         if (this.state.difficulty !== "" && this.state.difficulty !== "- Difficulty Level -") {
             newSearch["difficulty"] = this.state.difficulty
         }
-        console.log(newSearch)
+        // console.log(newSearch)
         let response = await axios.post(baseURL + "/recipes/search", newSearch)
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({
             recipesList: response.data.reverse()
         })
     }
-    resetQuery = async() => {
-        let response = await axios.get(baseURL+ "/recipes")
+    resetQuery = async () => {
+        let response = await axios.get(baseURL + "/recipes")
         this.setState({
             recipesList: response.data.reverse(),
             search_field: "",
@@ -82,16 +79,16 @@ export default class ViewAll extends React.Component {
                     <div className="des-container col-12 col-md-8 mt-2">
                         <Link to={"/view/" + l._id} className="des-title">{l.recipe_name}</Link>
                         <p>{l.description}</p>
-                        
-                <div className="tags-wrapper"> {this.renderTags(l.tags)}</div>
+
+                        <div className="tags-wrapper"> {this.renderTags(l.tags)}</div>
                         <p className="des-created">By: <strong>{l.created_by}</strong></p>
                     </div>
                     <div style={{
-                            display: this.props.loginStatus === true ? "flex" : "none"
-                        }} className="des-buttons">
-                            <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
-                           <button className="fas fa-trash-alt delete-btn ml-2" value={l._id} onClick={this.deleteRecipe}></button> 
-                        </div>
+                        display: this.props.loginStatus === true ? "flex" : "none"
+                    }} className="des-buttons">
+                        <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
+                        <button className="fas fa-trash-alt delete-btn ml-2" value={l._id} onClick={this.deleteRecipe}></button>
+                    </div>
                 </div>
             )
         }
@@ -109,22 +106,22 @@ export default class ViewAll extends React.Component {
     }
 
     checkColor = (text) => {
-        if (text === "5-Minutes Or Less"){
+        if (text === "5-Minutes Or Less") {
             return "#AAD4BE";
         }
-        if (text === "Date Night Special"){
+        if (text === "Date Night Special") {
             return "#F2CBAA";
         }
-        if (text === "Kids Favourite"){
+        if (text === "Kids Favourite") {
             return "#EEB6B7";
         }
-        if (text === "Made From Scratch"){
+        if (text === "Made From Scratch") {
             return "#ECB8CF";
         }
-        if (text === "Slow Cook Required"){
+        if (text === "Slow Cook Required") {
             return "#AFA7CE ";
         }
-        if (text === "Suitable For All"){
+        if (text === "Suitable For All") {
             return "#A6D6EA";
         }
     }
@@ -136,20 +133,16 @@ export default class ViewAll extends React.Component {
                     <div className="hero-wrapper">
                         <div className="home-hero-img">
                             <div className="hero-title">
-                                <h2>Recreate</h2>
-                                <h2>Recipe</h2>
-                                <p>Looking to recreate a dish?</p>
-                                <p>Find it a hassle to buy ingredients?</p>
-                                <p>With a single delivery you will have all you need. </p>
-
-
+                                <p className="hero-text"><strong>MealBox</strong></p>
+                                <div className="hero-des">
+                                    <p className="des-1">Looking to recreate a dish?</p>
+                                    <p className="des-2">Find it a hassle to buy ingredients?</p>
+                                    <p className="des-3">With a single delivery, a box is all you need.</p>
+                                </div>
                             </div>
                             <div className="cover-overlay home-overlay"></div>
                         </div>
                     </div>
-                    {/* <div className="container"> */}
-                    {/* <div className="row"></div> */}
-
                     <div className="filter-bar">
                         <input type="text" className="form-control my-1 mx-sm-2" name="search_field" value={this.state.search_field} placeholder="Search Recipe" onChange={this.updateField} />
                         <select className="form-control cuisine-bar my-1 mx-sm-2" name="cuisine_type" value={this.state.cuisine_type} onChange={this.updateField}>
@@ -171,7 +164,7 @@ export default class ViewAll extends React.Component {
                         </div>
                     </div>
                     <div className="filter-des">
-                        <p>Showing <strong> {this.state.recipesList.length} </strong> recipes.</p>
+                        <p>Showing <strong> {this.state.recipesList.length} </strong> recipes...</p>
                     </div>
                     {this.renderList()}
                     <div className="space"></div>

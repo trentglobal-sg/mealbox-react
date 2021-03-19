@@ -58,8 +58,21 @@
     position: absolute;
     color: white;
     left: 10%;
-    top: 20%;
+    top: 10%;
     z-index: 99;
+}
+
+.hero-text{
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 120px;
+    margin-bottom: 0 !important;
+
+}
+
+.hero-des{
+    position: absolute;
+    top: 80%;
+
 }
 
 .create-textarea{
@@ -311,8 +324,20 @@
     }
 }
 
-/* @media only screen and (max-width: 450px){
-  .logo-img{
-      display:none !important;
-  }
-} */
+@media only screen and (max-width: 450px){
+    .hero-title{
+        top:30%;
+        width:90%;
+    }
+    
+    .hero-text{
+        font-size:80px;
+    }
+    .des-1{
+        display:none !important;
+    }
+    .des-2{
+        display:none !important;
+    }
+  
+}

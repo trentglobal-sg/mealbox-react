@@ -128,7 +128,7 @@ export default class CreateRecipe extends React.Component {
             img_url: this.state.img_url
         }
         let response = await axios.put(baseURL + "/resources", newResource)
-        console.log(response.data)
+        // console.log(response.data)
         // Update Recipe Collections
         let regExp = /\s*!\s*/;
         let newIngredients = this.state.ingredients.split(regExp)
@@ -152,7 +152,7 @@ export default class CreateRecipe extends React.Component {
             }
         }
         let response2 = await axios.put(baseURL + "/recipes", newRecipe)
-        console.log(response2.data)
+        // console.log(response2.data)
         if (response.data.Message === "Updated Resource" && response2.data.Message === "Updated Recipe") {
             this.props.history.push("/")
         }
