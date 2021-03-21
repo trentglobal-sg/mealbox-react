@@ -197,3 +197,51 @@ This page will gather input relevant information of the recipe from the user.
 
 ## Navigation
 Navigation between sites can be done by using the nav bar provided. 
+
+# Surface
+## Color
+On the Home Page, I have decided to use a repeating image that consist of food as icons for the background. 
+
+Nav bar and cards are kept to white for easy contrast and readability. 
+
+Orange is the main color used because it is considered an energetic color. It calls the mind to feel excitement, enthusiasm, and warmth. 
+
+You will see various other colors used to identify the tags associated with the recipe. 
+
+
+## Fonts
+[Ma Shan Zheng](https://fonts.google.com/specimen/Ma+Shan+Zheng?preview.text_type=custom#about) font are used for the Brand as it is gives a heavy and majestic, vital and expansive feel. 
+
+[Roboto Slab](https://fonts.google.com/specimen/Roboto+Slab?preview.text_type=custom#glyphs) font are used to inherit all of the body text in the webpage. 
+
+The font has a dual nature. The form are largely geometric and features friendly and open curves. Allowing letters to be settled into their natural width making reading rhythm more harmonise. 
+
+## Features
+
+## Content
+The webpage contains all the neccessary information the user needs. Compiled and tabulated in a simple and easy to read manner.
+
+## Responsiveness
+The webpage is responsive across various devices from desktop and laptop to phones and tablets. The component will automatically re-arrange itself based on the screen size.
+
+Reccommended view tablets is in landscape mode. 
+
+# Testing
+## Functionality Test
+## Home Page
+|Category |Input/Actions | Output/Errors |
+|---------|-----------------------------|---------------------|
+|Overall | Mobile Responsive Check| No display error|
+|Nav Bar| On load | Display Logo Typography, "Home", "Create" and pseudo signin button|
+| | Clicking on "Home"| Refreshes the page|
+| | Clicking on "Create" | Redirects to "Create Recipe Page"|
+| | Click on "Sign In" |Will trigger a conditional rendering, making editing and deleting of recipe possible. "Sign In" will change to "Log Out"| 
+| | Click on "Log Out" |Will trigger a conditional rendering, removing editing and deleting of recipe. "Log Out" will change to "Sign In"
+| Search Filter| Typing into "Search Recipe" | The space will capture what the user type. Page will not change until "Search" is clicked. 
+| | Selecting "Cuisine Type" | The drop-down will change to the selected cuisine type. Page will not change until "Search" is clicked. |
+| | Selecting "Difficulty" | The drop-down will change to the selected difficulty. Page will not change until "Search" is clicked.|
+| | Clicking on "Search" btn| Will show results based on search filter. Will dispaly 0 recipe if nothing is found.|
+| | Clicking on "Reset" btn | Will reset all search fields and show all recipes.|
+|Recipes | Clicking on Title of recipe | Will be redirected into the selected recipe page.|
+| | Clicking on "Edit" btn | Will be redirected into the selected recipe editing page.|
+| | Clicking on "Delete" btn | System will delete the recipe from page and DB.|
