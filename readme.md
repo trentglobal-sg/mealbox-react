@@ -17,7 +17,7 @@ Site owner's goal: To showcase proficiency in the mentioned programming language
 ## Access
 Url to live site: 
 
-![Display sample on different devices upon loading]()
+![Display sample on different devices upon loading](images/display-sample.png)
 
 
 # Defining the Project
@@ -139,12 +139,7 @@ SCI10. Cuisine Type.
 SCI11. Ingredients.
 SCI12. Directions.
 SCI13. Reviewer name.
-SCI14. Reviewr comments.
-```
-
-### Image required
-```
-SCI14. Individual recipe image. 
+SCI14. Reviewer comments.
 ```
 
 ### Information required on the create recipe page
@@ -158,7 +153,7 @@ Home Page > Individual Recipe Page
 Home Page > Create Recipe Page
 
 
-![Content Structure Image]()
+![Content Structure Image](images/content-structure.png)
 1. Home Page:
     * The page will only have a few section that contains the hero image, search filter and showing of the recipes.  
     * When there is no search, database will show all recipes. 
@@ -184,16 +179,21 @@ All page should adopt a similar design for harmony in design.
 ## Home Page
 This page will focus search and display of the recipe. 
 
-![Skeleton Design for Home Page]()
+![Skeleton Design for Home Page](images/skeleton-home.png)
 
 ## Individual Recipe Page
 This page will focus on showing all the relevant information of the recipe. 
 
-![Skeleton Design for Individual Recipe Page]()
+![Skeleton Design for Individual Recipe Page](images/skeleton-individual.png)
+
+## Create Recipe Page
+This page will gather input relevant information of the recipe from the user. 
+
+![Skeleton Design for Individual Recipe Page](images/skeleton-create.png)
 
 ## Site Map
 
-![Site Map]()
+![Site Map](images/site-map.png)
 
 ## Navigation
 Navigation between sites can be done by using the nav bar provided. 
