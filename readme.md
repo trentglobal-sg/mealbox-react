@@ -245,3 +245,94 @@ Reccommended view tablets is in landscape mode.
 |Recipes | Clicking on Title of recipe | Will be redirected into the selected recipe page.|
 | | Clicking on "Edit" btn | Will be redirected into the selected recipe editing page.|
 | | Clicking on "Delete" btn | System will delete the recipe from page and DB.|
+
+
+## Individual Recipe Page
+|Category |Input/Actions | Output/Errors |
+|---------|-----------------------------|---------------------|
+|Overall | Mobile Responsive Check| No display error|
+|Page Function| On load | Load information for the individual recipe and its comment. |
+|Nav Bar| On load | Display Logo Typography, "Home", "Create" and pseudo signin button|
+| | Clicking "Home"| Redirect back to Home page|
+| | Clicking "Create" | Redirects to "Create Recipe Page"|
+| | Clicking "Sign In" |Will trigger a conditional rendering, making editing and deleting of comments possible. "Sign In" will change to "Log Out"| 
+| | Clicking "Log Out" |Will trigger a conditional rendering, removing editing and deleting of comments. "Log Out" will change to "Sign In"
+|Reviews | Input on text field| Will display user input.|
+| | Clicking "Create"| Comment will be created and display below. Input will be reset. |
+||Clicking "Edit" | Values of comment will be automatically loaded into space. "Submit"  and " Cancel"  button will show instead of "Create" |
+|| Clicking "Submit"| New values of comment will be shown. "Create" button will replace "Submit" and "Cancel"|
+|| Clicking "Cancel"|  No values will be changed. "Create" button will replace "Submit" and "Cancel"|
+
+
+## Create/Edit Recipe Page
+|Category |Input/Actions | Output/Errors |
+|---------|-----------------------------|---------------------|
+|Overall | Mobile Responsive Check| No display error|
+|Page Function| On load - from edit | Load information for the individual recipe.  |
+|Nav Bar| On load | Display Logo Typography, "Home", "Create" and pseudo signin button|
+| | Clicking "Home"| Redirect back to Home page|
+| | Clicking "Create" | No output |
+| | Clicking  "Sign In" | No output. "Sign In" will change to "Log Out"| 
+| | Clicking "Log Out" | No output. "Log Out" will change to "Sign In"|
+| | Input into fields | Will display user input|
+| | Clicking "Create" | Recipe will be created and redirect to Home|
+| | Editing - Clicking "Submit" | New values will be captured and redirect to Home|
+| | Clicking "Cancel" | Redirect to Home| 
+
+
+## Validating Markup
+All pages validated by validating service  [W3C Markup Validator](https://validator.w3.org/).
+```
+Document checking completed. No errors or warnings to show.
+```
+
+# Deployment
+Ensured all changes has been save and pushed to GitHub.
+
+MealBox is deployed to Github. All icons and images used in the project are stored together. You need to ensure CDN to font-awesome is imported. 
+
+Data sets are store in Heroku and are called automatically. It may take up to thirty seconds for data set to be loaded. 
+
+If you would like to deploy or fork this application you can visit https://github.com/yongsannnn/mealbox-react. There is only one branch to this application. 
+
+Apart from React default package. Ensure the  mentioned depencencies are in package. 
+```
+axios
+bootstrap
+react-router-dom
+```
+
+# Technologies
+In this application JSX is used to structure the content, CSS3 for styling and JavaScript to process data.
+
+Gitpod is used as the main coding platform. 
+
+By using Bootstrap 4, mobile responsive design is made easier with the row-col system. 
+
+To demostrate proficiency, I have used CSS to create simple transform, mobile responsive codes with media query and flexbox.
+
+Several other tools that played a role in this application:
+
+For API,
+* [Axios](https://github.com/axios/axios)
+
+For styling,
+* [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+
+For deployment,
+* [Github](https://github.com/)
+
+For icons,
+* [Flaticon](https://www.flaticon.com/)
+* [FontAwesome](https://fontawesome.com/)
+
+For background-image,
+* [Toptal](https://www.toptal.com/designers/subtlepatterns/)
+
+For validating markup,
+* [W3 Markup Validation Service](http://validator.w3.org/)
+
+# Acknowledgments
+* Mr Paul Chor - For all the countless suggestions and help
+* Mr Ace Liang - For sharing layout and CSS Tips
+* Mr Benjamin Png - For your continuous assitance and brainstorming of ideas  

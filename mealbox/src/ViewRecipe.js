@@ -42,7 +42,9 @@ export default class ViewRecipe extends React.Component {
         // console.log(response.data)
         if (response.data.Message === "Comments Inserted") {
             this.setState({
-                commentsList: [newComment, ...this.state.commentsList]
+                commentsList: [newComment, ...this.state.commentsList],
+                comment: "",
+                comment_name: ""
             })
         }
     }
