@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 
-const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
+const baseURL = "https://gys-tgc11-mealbox.herokuapp.com"
 
 
 export default class CreateRecipe extends React.Component {
