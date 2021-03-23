@@ -15,7 +15,7 @@ Site owner's goal: To showcase proficiency in the mentioned programming language
 
 
 ## Access
-Url to live site: 
+Url to live site:  https://happy-albattani-303d99.netlify.app/
 
 ![Display sample on different devices upon loading](images/display-sample.png)
 
@@ -289,27 +289,104 @@ Document checking completed. No errors or warnings to show.
 # Deployment
 Ensured all changes has been save and pushed to GitHub.
 
-MealBox is deployed to Github. All icons and images used in the project are stored together. You need to ensure CDN to font-awesome is imported. 
+If you would like to deploy or fork this application you can visit https://github.com/yongsannnn/mealbox-react.  There is only one branch to this application. 
+
+MealBox is deployed to Netlify. All icons and images used in the project are stored together.  
 
 Data sets are store in Heroku and are called automatically. It may take up to thirty seconds for data set to be loaded. 
 
-If you would like to deploy or fork this application you can visit https://github.com/yongsannnn/mealbox-react. There is only one branch to this application. 
-
-Apart from React default package. Ensure the  mentioned depencencies are in package. 
+Apart from React default package. Ensure you have the following depencencies. 
 ```
 axios
 bootstrap
 react-router-dom
 ```
 
+## Heroku 
+
+Step 1| Login to Heroku.
+
+At the terminal, log in to heroku with `heroku login -i`. Enter your username and password. 
+
+Step2| Create the Heroku App
+
+Once you have logged in, create a new Heroku app with the following commands at the terminal:
+
+`heroku create <app-name>`
+
+Replace `<app-name>` with a name of your choice. Do not use underscore. As the app name has to be unique, make sure the name you use is distinctive. You can use your initials as part of the app name, for instance.
+
+Step 3| Define Procfile
+
+Create one in the same directory as index.js and name it as `Procfile`
+
+Add the following line to the Procfile:
+```
+web: node index.js
+```
+
+Step 4| Add a start script to package.json
+
+```
+{...,
+"scripts": {
+    "start": "node index.js"
+  }
+}
+```
+
+Step 5| Change the port that we are using
+
+Change app.listen to `process.env.PORT`
+
+Step 6| Push to Heroku
+```
+git push heroku master
+```
+
+Step 7| Setup the config variables
+
+Go to Heroku and look for the app you just deployed. Then click on Settings:
+
+Next, click on Reveal Config Vars:
+
+After which, add in MONGO_URL, and the connection URL from your .env file:
+
+Step 8| Run the app
+
+From your Heroku project panel, click on the button that says Open App. Test if your app is working.
+
+Credits: Mr Paul Chor
+
+## Netlify
+
+Step 1| Run build
+
+Run the following command in your react terminal. Ensure you are in index.js directory 
+```
+npm run build
+```
+
+Step 2| Download to local file
+
+After the build command completes, look for the folder `build` right click and download it.
+
+Extract it as a folder in your local computer. 
+
+Step 3| Deployment
+
+Login to Netlify, click on "Sites" and drag the folder into the space. 
+
+
+
 # Technologies
-In this application JSX is used to structure the content, CSS3 for styling and JavaScript to process data.
+In this application JSX is used to structure the content, CSS3 and Bootstrap for styling and JavaScript to process data.
 
 Gitpod is used as the main coding platform. 
 
 By using Bootstrap 4, mobile responsive design is made easier with the row-col system. 
 
-To demostrate proficiency, I have used CSS to create simple transform, mobile responsive codes with media query and flexbox.
+To demostrate proficiency, I have used CSS to create mobile responsive codes with media query and flexbox.
 
 Several other tools that played a role in this application:
 
@@ -321,6 +398,8 @@ For styling,
 
 For deployment,
 * [Github](https://github.com/)
+* [Heroku](https://www.heroku.com/)
+* [Netlify](https://netlify.app/)
 
 For icons,
 * [Flaticon](https://www.flaticon.com/)
