@@ -89,10 +89,29 @@ export default class ViewAll extends React.Component {
                         <Link to={"/edit/" + l._id} className="fas fa-edit edit-btn"></Link>
                         <button className="fas fa-trash-alt delete-btn ml-2" value={l._id} onClick={this.deleteRecipe}></button>
                     </div>
+                    <div className="des-difficulty" style={{
+                        background: this.checkDifficulty(l.difficulty)
+                    }}>{l.difficulty[0]}</div>
                 </div>
             )
         }
+        if(list.length === 0 ){
+            list.push(
+                <div> No recipe found. </div>
+            )
+        }
         return list
+    }
+    checkDifficulty = (difficulty)=>{
+        if (difficulty === "Easy"){
+            return "#B9FB50"
+        }
+        if (difficulty === "Moderate"){
+            return "#F8D047"
+        }
+        if (difficulty === "Hard"){
+            return "#ED672C"
+        }
     }
 
     renderTags = (tags) => {
