@@ -11,12 +11,14 @@ export default class ViewAll extends React.Component {
         search_field: "",
         cuisine_type: "",
         difficulty: "",
+        isLoaded: false,
     }
 
     async componentDidMount() {
         let response = await axios.get(baseURL + "/recipes");
         this.setState({
-            recipesList: response.data.reverse()
+            recipesList: response.data.reverse(),
+            isLoaded: true
         })
     }
 
@@ -146,7 +148,14 @@ export default class ViewAll extends React.Component {
     }
 
     render() {
-        return (
+        if (this.state.isLoaded === false) {
+            return (
+                <React.Fragment>
+                    <img className="loading" src="https://ucarecdn.com/68a0fdc0-6074-4492-ba08-6ace1f689b6d/200.gif" alt="loading" />
+                </React.Fragment>
+            )
+        } else {
+             return (
             <React.Fragment>
                 <div className="container">
                     <div className="hero-wrapper">
@@ -190,5 +199,6 @@ export default class ViewAll extends React.Component {
                 </div>
             </React.Fragment>
         )
+        }
     }
 }
