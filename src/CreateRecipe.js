@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 
-const baseURL = "https://gys-tgc11-mealbox.herokuapp.com"
+const baseURL = process.env.REACT_APP_BASE_API_URL;
 
 
 export default class CreateRecipe extends React.Component {
@@ -28,10 +28,7 @@ export default class CreateRecipe extends React.Component {
     async componentDidMount() {
         if (this.props.match.path !== "/new") {
             let recipe_id = this.props.match.params.l_id;
-            let response = await axios.post(baseURL + "/recipes/individual", {
-                recipe_id: recipe_id
-            })
-            // console.log(response.data)
+            let response = await axios.get(baseURL + "/recipes/" + recipe_id);
             this.setState({
                 //Flag
                 isLoaded: true,
@@ -127,7 +124,7 @@ export default class CreateRecipe extends React.Component {
             _id: this.state.resource_id,
             img_url: this.state.img_url
         }
-        let response = await axios.put(baseURL + "/resources", newResource)
+        let response = await axios.put(baseURL + "/resources/" + this.state.resource_id, newResource)
         // console.log(response.data)
         // Update Recipe Collections
         let regExp = /\s*!\s*/;

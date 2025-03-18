@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 
-const baseURL = "https://gys-tgc11-mealbox.herokuapp.com"
+const baseURL = process.env.REACT_APP_BASE_API_URL;
 
 
 export default class ViewAll extends React.Component {
@@ -53,7 +53,9 @@ export default class ViewAll extends React.Component {
             newSearch["difficulty"] = this.state.difficulty
         }
         // console.log(newSearch)
-        let response = await axios.post(baseURL + "/recipes/search", newSearch)
+        let response = await axios.get(baseURL + "/recipes/search", {
+            params: newSearch
+        })
         // console.log(response.data)
         this.setState({
             recipesList: response.data.reverse()

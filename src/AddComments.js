@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 
-const baseURL = "https://3001-bronze-barnacle-pdcp8mf3.ws-us03.gitpod.io"
+const baseURL = process.env.REACT_APP_BASE_API_URL;
 
 
 export default class AddComments extends React.Component {

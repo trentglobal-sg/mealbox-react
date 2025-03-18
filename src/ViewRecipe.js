@@ -1,6 +1,6 @@
 import React from "react"
 import axios from "axios"
-const baseURL = "https://gys-tgc11-mealbox.herokuapp.com"
+const baseURL = process.env.REACT_APP_BASE_API_URL;
 
 
 export default class ViewRecipe extends React.Component {
@@ -19,12 +19,8 @@ export default class ViewRecipe extends React.Component {
 
     async componentDidMount() {
         let recipe_id = this.props.match.params.l_id;
-        let response = await axios.post(baseURL + "/recipes/individual", {
-            recipe_id: recipe_id
-        })
-        let response2 = await axios.post(baseURL + "/comments/individual", {
-            recipe_id: recipe_id
-        })
+        let response = await axios.get(baseURL + `/recipes/${recipe_id}`);
+        let response2 = await axios.get(baseURL + `/recipes/${recipe_id}/comments`);
         this.setState({
             isLoaded: true,
             individualRecipe: response.data,
