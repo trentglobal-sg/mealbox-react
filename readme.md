@@ -15,7 +15,7 @@ Site owner's goal: To showcase proficiency in the mentioned programming language
 
 
 ## Access
-Url to live site:  https://happy-albattani-303d99.netlify.app/
+Url to live site:  https://lively-zabaione-3ad7ee.netlify.app/
 
 ![Display sample on different devices upon loading](images/display-sample.png)
 
